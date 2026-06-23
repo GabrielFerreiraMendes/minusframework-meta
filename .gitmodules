@@ -16,3 +16,6 @@
 [submodule "Extensions"]
 	path = Extensions
 	url = https://github.com/GabrielFerreiraMendes/minusframework-extensions.git
+[submodule "ORM"]
+	path = ORM
+	url = https://github.com/GabrielFerreiraMendes/minusframework-orm.git

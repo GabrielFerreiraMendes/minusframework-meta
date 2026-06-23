@@ -15,7 +15,7 @@
         <Projects Include="Core\Packages\MinusFramework_Design.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Core\MinusORM.dproj">
+        <Projects Include="ORM\MinusORM.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Migrator\MinusMigrator_DLL.dproj">
@@ -30,10 +30,10 @@
         <Projects Include="Migrator\Tests\Test.MinusMigrator.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Core\Tests\ORM\Test.MinusORM.dproj">
+        <Projects Include="ORM\Tests\Test.MinusORM.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Core\Samples\MinusDemo\MinusDemo.dproj">
+        <Projects Include="ORM\Samples\MinusDemo\MinusDemo.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="FeatureFlags\FeatureFlags\MinusFeatureFlags.dproj">
@@ -102,13 +102,13 @@
         <MSBuild Projects="Core\Packages\MinusFramework_Design.dproj" Targets="Make"/>
     </Target>
     <Target Name="MinusORM">
-        <MSBuild Projects="Core\MinusORM.dproj"/>
+        <MSBuild Projects="ORM\MinusORM.dproj"/>
     </Target>
     <Target Name="MinusORM:Clean">
-        <MSBuild Projects="Core\MinusORM.dproj" Targets="Clean"/>
+        <MSBuild Projects="ORM\MinusORM.dproj" Targets="Clean"/>
     </Target>
     <Target Name="MinusORM:Make">
-        <MSBuild Projects="Core\MinusORM.dproj" Targets="Make"/>
+        <MSBuild Projects="ORM\MinusORM.dproj" Targets="Make"/>
     </Target>
     <Target Name="MinusMigrator_DLL">
         <MSBuild Projects="Migrator\MinusMigrator_DLL.dproj"/>
@@ -147,22 +147,22 @@
         <MSBuild Projects="Migrator\Tests\Test.MinusMigrator.dproj" Targets="Make"/>
     </Target>
     <Target Name="Test_MinusORM">
-        <MSBuild Projects="Core\Tests\ORM\Test.MinusORM.dproj"/>
+        <MSBuild Projects="ORM\Tests\Test.MinusORM.dproj"/>
     </Target>
     <Target Name="Test_MinusORM:Clean">
-        <MSBuild Projects="Core\Tests\ORM\Test.MinusORM.dproj" Targets="Clean"/>
+        <MSBuild Projects="ORM\Tests\Test.MinusORM.dproj" Targets="Clean"/>
     </Target>
     <Target Name="Test_MinusORM:Make">
-        <MSBuild Projects="Core\Tests\ORM\Test.MinusORM.dproj" Targets="Make"/>
+        <MSBuild Projects="ORM\Tests\Test.MinusORM.dproj" Targets="Make"/>
     </Target>
     <Target Name="MinusDemo">
-        <MSBuild Projects="Core\Samples\MinusDemo\MinusDemo.dproj"/>
+        <MSBuild Projects="ORM\Samples\MinusDemo\MinusDemo.dproj"/>
     </Target>
     <Target Name="MinusDemo:Clean">
-        <MSBuild Projects="Core\Samples\MinusDemo\MinusDemo.dproj" Targets="Clean"/>
+        <MSBuild Projects="ORM\Samples\MinusDemo\MinusDemo.dproj" Targets="Clean"/>
     </Target>
     <Target Name="MinusDemo:Make">
-        <MSBuild Projects="Core\Samples\MinusDemo\MinusDemo.dproj" Targets="Make"/>
+        <MSBuild Projects="ORM\Samples\MinusDemo\MinusDemo.dproj" Targets="Make"/>
     </Target>
     <Target Name="MinusFeatureFlags">
         <MSBuild Projects="FeatureFlags\FeatureFlags\MinusFeatureFlags.dproj"/>
