@@ -2,6 +2,7 @@
 *.ddp
 *.local
 *.map
+*.exe
 *.drc
 *.rsm
 *.tds
