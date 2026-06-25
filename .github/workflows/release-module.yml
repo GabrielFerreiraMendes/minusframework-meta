@@ -26,6 +26,7 @@ jobs:
       - name: Override module with tag
         shell: powershell
         run: |
+          $ErrorActionPreference = "Continue"
           $module = "${{ inputs.repo }}"
           $tag = "${{ inputs.tag }}"
           $dir = switch ($module) {
@@ -38,8 +39,10 @@ jobs:
             "minusframework-extensions"   { "Extensions" }
             "minusframework-ai"           { "AI" }
           }
-          git -C "meta\$dir" fetch origin tag "$tag" 2>&1
-          git -C "meta\$dir" checkout "tags/$tag" 2>&1
+          git -C "meta\$dir" fetch origin tag $tag
+          if ($LASTEXITCODE -ne 0) { throw "git fetch failed" }
+          git -C "meta\$dir" checkout $tag
+          if ($LASTEXITCODE -ne 0) { throw "git checkout failed" }
 
       - name: Build
         shell: powershell
