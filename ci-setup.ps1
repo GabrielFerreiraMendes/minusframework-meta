@@ -1,8 +1,8 @@
 param([string]$Token)
 
 $ErrorActionPreference = "Stop"
-$Root = Split-Path -Parent $PSScriptRoot
-$Auth = if ($Token) { "https://x-access-token:$Token@github.com/GabrielFerreiraMendes" } else { "https://github.com/GabrielFerreiraMendes" }
+$Root = $PSScriptRoot
+$Auth = if ($Token) { "https://GabrielFerreiraMendes:$Token@github.com/GabrielFerreiraMendes" } else { "https://github.com/GabrielFerreiraMendes" }
 
 $Repos = @(
     "minusframework-telemetry",
