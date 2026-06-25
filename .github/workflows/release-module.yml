@@ -46,6 +46,10 @@ jobs:
 
       - name: Build
         shell: powershell
+        env:
+          BDS: "C:\Program Files (x86)\Embarcadero\Studio\23.0"
+          BDSINCLUDE: "C:\Program Files (x86)\Embarcadero\Studio\23.0\include"
+          FrameworkDir: "C:\Windows\Microsoft.NET\Framework64\v4.0.30319"
         run: |
           $msbuild = if (Get-Command msbuild -ErrorAction SilentlyContinue) { "msbuild" } else { "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe" }
           $module = "${{ inputs.repo }}"
