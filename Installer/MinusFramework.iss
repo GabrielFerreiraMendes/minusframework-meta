@@ -68,6 +68,16 @@ Source: "Staging\Samples\*";           DestDir: "{app}\Samples"; Components: doc
 
 [Code]
 
+function GetBplDir(Version: string): string;
+begin
+  Result := ExpandConstant('{commonappdata}\Embarcadero\Studio\' + Version + '\Bpl');
+end;
+
+function GetDcpDir(Version: string): string;
+begin
+  Result := ExpandConstant('{commonappdata}\Embarcadero\Studio\' + Version + '\Dcp');
+end;
+
 function GetDefaultInstallDir(Param: string): string;
 begin
   Result := ExpandConstant('{pf}\MinusFramework');
