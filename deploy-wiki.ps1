@@ -1,6 +1,27 @@
 param([string]$Token)
 
 $ErrorActionPreference = "Stop"
+$WikiUrl = "https://github.com/GabrielFerreiraMendes/minusframework-meta.wiki"
+
+Write-Host "MinusFrameWork - Wiki Deploy" -ForegroundColor Cyan
+Write-Host "============================" -ForegroundColor Cyan
+Write-Host ""
+
+if (-not (Test-Path "$WikiUrl.git")) {
+    Write-Host "1. Primeiro, acesse no navegador:" -ForegroundColor Yellow
+    Write-Host "   $WikiUrl" -ForegroundColor White
+    Write-Host "   (Clique em 'Create the first page' se aparecer)"
+    Write-Host ""
+    Write-Host "2. Depois execute este script novamente com -Token" -ForegroundColor Yellow
+    Write-Host "   .\deploy-wiki.ps1 -Token `"seu_pat`"" -ForegroundColor White
+    Write-Host ""
+    
+    if ($Token) {
+        Write-Host "Tentando push com token fornecido..." -ForegroundColor Gray
+    } else {
+        exit 1
+    }
+}
 
 $WikiPages = @{
     "Home"             = "# Welcome to the MinusFrameWork Wiki`n`nMinusFrameWork is a modern Delphi framework for building enterprise applications.`n`n## Modules`n`n- **[Core](Core)** - Base framework (attributes, config, connection pool, exceptions)`n- **[ORM](ORM)** - Object-Relational Mapping with FireDAC`n- **[Migrator](Migrator)** - Database migration management`n- **[Messaging](Messaging)** - Async messaging and event bus`n- **[Telemetry](Telemetry)** - Application monitoring and metrics`n- **[FeatureFlags](FeatureFlags)** - Feature flag management`n- **[Extensions](Extensions)** - Additional utilities and helpers`n- **[AI](AI)** - MCP Server for AI-assisted development`n- **[CLI](CLI)** - Command-line scaffolding tool`n`n## Quick Links`n`n- [Getting Started](Getting-Started)`n- [Architecture Overview](Architecture)`n- [Contributing](Contributing)`n- [License](https://github.com/GabrielFerreiraMendes/minusframework-meta/blob/main/LICENSE)"
@@ -21,30 +42,31 @@ $WikiPages = @{
 }
 
 $tmpDir = Join-Path $env:TEMP "minusframework-wiki-deploy"
-if (Test-Path $tmpDir) { Remove-Item $tmpDir -Recurse -Force }
+if (Test-Path $tmpDir) { Remove-Item $tmpDir -Recurse -Force -ErrorAction SilentlyContinue }
 New-Item -ItemType Directory -Path $tmpDir -Force | Out-Null
 
-Set-Location $tmpDir
-git init
-git checkout -b main
+Push-Location $tmpDir
+git init 2>$null | Out-Null
+git checkout -b main 2>$null | Out-Null
 
 foreach ($page in $WikiPages.Keys) {
     Set-Content -Path "$page.md" -Value $WikiPages[$page] -NoNewline
 }
 
-git add -A
-git commit -m "docs: initial wiki setup"
+git add -A 2>$null
+git commit --allow-empty -m "docs: initial wiki setup" 2>$null | Out-Null
 
-if ($Token) {
-    $repoUrl = "https://GabrielFerreiraMendes:${Token}@github.com/GabrielFerreiraMendes/minusframework-meta.wiki.git"
+$repoUrl = "https://GabrielFerreiraMendes:${Token}@github.com/GabrielFerreiraMendes/minusframework-meta.wiki.git"
+git remote add origin $repoUrl 2>$null
+git push -u origin main 2>&1
+
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "`nWiki deployed successfully!" -ForegroundColor Green
+    Write-Host "Acesse: $WikiUrl" -ForegroundColor Cyan
 } else {
-    $repoUrl = "https://github.com/GabrielFerreiraMendes/minusframework-meta.wiki.git"
+    Write-Host "`nFalha ao fazer push." -ForegroundColor Red
+    Write-Host "Verifique se o wiki foi criado em: $WikiUrl" -ForegroundColor Yellow
 }
 
-git remote add origin $repoUrl
-git push -u origin main
-
-Remove-Item $tmpDir -Recurse -Force
-Set-Location $PSScriptRoot
-
-Write-Host "Wiki deployed!" -ForegroundColor Green
+Pop-Location
+Remove-Item $tmpDir -Recurse -Force -ErrorAction SilentlyContinue
