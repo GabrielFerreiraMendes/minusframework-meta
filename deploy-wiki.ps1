@@ -48,6 +48,9 @@ foreach ($page in $WikiPages.Keys) {
     Set-Content -Path "$page.md" -Value $WikiPages[$page] -NoNewline
 }
 
+git config user.email "github-actions[bot]@users.noreply.github.com"
+git config user.name "github-actions[bot]"
+
 git add -A 2>$null
 git commit --allow-empty -m "docs: initial wiki setup" 2>$null | Out-Null
 
