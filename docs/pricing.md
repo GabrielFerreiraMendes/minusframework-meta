@@ -89,10 +89,10 @@ O objetivo é que o projeto se sustente comercialmente pelas licenças **Pro** e
 
 === "Pix"
 
-    <!-- Substitua `SEU_PIX_AQUI` pela sua chave Pix (CPF, email, celular ou aleatória) -->
-    ![QR Code Pix](https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=SEU_PIX_AQUI&bgcolor=ffffff&color=111111)
+    <!-- Chave Pix aleatória: 4214aaa8-d6d1-4d01-81c1-7a0835fdc5b2 -->
+    ![QR Code Pix](https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=4214aaa8-d6d1-4d01-81c1-7a0835fdc5b2&bgcolor=ffffff&color=111111)
 
-    **Chave Pix:** `gabriel@minusframework.com.br`
+    **Chave Pix:** `4214aaa8-d6d1-4d01-81c1-7a0835fdc5b2`
 
 === "PayPal"
 
