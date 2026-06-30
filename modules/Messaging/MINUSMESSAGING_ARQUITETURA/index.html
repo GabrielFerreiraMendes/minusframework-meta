@@ -1,0 +1,3710 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ORM, Mensageria, Telemetria, Migrator e MCP Server para Delphi">
+      
+      
+        <meta name="author" content="MinusFrameWork">
+      
+      
+        <link rel="canonical" href="https://minusframework.com.br/modules/Messaging/MINUSMESSAGING_ARQUITETURA/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>MinusMessaging â€” Arquitetura de Mensageria para Delphi - MinusFrameWork</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#minusmessaging-a-arquitetura-de-mensageria-para-delphi" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../.." title="MinusFrameWork" class="md-header__button md-logo" aria-label="MinusFrameWork" data-md-component="logo">
+      
+  <img src="../../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MinusFrameWork
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MinusMessaging â€” Arquitetura de Mensageria para Delphi
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo escuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo escuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GabrielFerreiraMendes/minusframework-meta" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../getting-started/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Quick Start
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../orm/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  ORM
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cli/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  CLI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../migrator/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Migrator
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../messaging/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mensageria
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../ai/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  MinusAI
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../extensions/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Extensões
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../telemetry/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Telemetria
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../FeatureFlags/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Feature Flags
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../licensing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Licenciamento
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sobre
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MinusFrameWork" class="md-nav__button md-logo" aria-label="MinusFrameWork" data-md-component="logo">
+      
+  <img src="../../../assets/logo.svg" alt="logo">
+
+    </a>
+    MinusFrameWork
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GabrielFerreiraMendes/minusframework-meta" title="Ir para repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../orm/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ORM
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ORM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../orm/crud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CRUD Básico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../orm/entities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mapeamento de Entidades
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../orm/criteria/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Criteria API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../orm/unit-of-work/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit of Work
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../orm/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ORM/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs do Módulo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../cli/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    CLI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comandos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/make-entity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    make:entity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cli/new-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    new api
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../migrator/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrator
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Migrator
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../migrator/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../migrator/dll/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DLL Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Migrator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs do Módulo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../messaging/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mensageria
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mensageria
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../messaging/config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuração
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../messaging/sagas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sagas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs do Módulo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MinusAI
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MinusAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai/mcp-server/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../ai/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ferramentas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../extensions/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extensões
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Extensões
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../extensions/soft-delete/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soft Delete
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../extensions/audit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../extensions/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Extensions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docs do Módulo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../telemetry/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Telemetria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../FeatureFlags/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature Flags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../licensing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licenciamento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sobre
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SumÃ¡rio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. VisÃ£o Geral
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. VisÃ£o Geral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-o-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 O Problema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-a-soluaao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 A SoluÃ§Ã£o
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-princapios-arquiteturais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 PrincÃ­pios Arquiteturais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Arquitetura
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-diagrama-de-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Diagrama de Camadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fluxo-de-mensagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Fluxo de Mensagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-modelo-de-dados-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Modelo de Dados (Core)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-camada-core-abstraaaes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Camada Core (AbstraÃ§Ãµes)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Camada Core (AbstraÃ§Ãµes)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-interface-principal-a-imensageria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Interface Principal â€” IMensageria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-provedor-provider-a-contrato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Provedor (Provider) â€” Contrato
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-serializaaao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 SerializaÃ§Ã£o
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-mensagens-sancronas-requestreply" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Mensagens SÃ­ncronas (Request/Reply)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-provedores-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Provedores (Providers)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Provedores (Providers)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-inmemory-a-tprovedormemoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 InMemory â€” TProvedorMemoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-redis-a-tprovedorredis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Redis â€” TProvedorRedis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-rabbitmq-a-tprovedorrabbitmq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 RabbitMQ â€” TProvedorRabbitMQ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-mqtt-a-tprovedormqtt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 MQTT â€” TProvedorMQTT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-kafka-a-tprovedorkafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Kafka â€” TProvedorKafka
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-tabela-comparativa-de-providers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Tabela Comparativa de Providers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-padraes-de-confiabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. PadrÃµes de Confiabilidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. PadrÃµes de Confiabilidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-retry-com-backoff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Retry com Backoff
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-dead-letter-queue-dlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Dead Letter Queue (DLQ)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-outbox-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Outbox Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-saga-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4 Saga Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 Saga Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coreografia-event-driven" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coreografia (event-driven)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orquestraaao-saga-centralizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OrquestraÃ§Ã£o (saga centralizada)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-circuit-breaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.5 Circuit Breaker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#56-idempotaancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 IdempotÃªncia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-integraaao-com-o-ecossistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. IntegraÃ§Ã£o com o Ecossistema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. IntegraÃ§Ã£o com o Ecossistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-minusorm-a-outbox-idempotaancia-sagas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 MinusORM â€” Outbox + IdempotÃªncia + Sagas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-minusfeatureflags-a-controle-de-consumidores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 MinusFeatureFlags â€” Controle de Consumidores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-minusrest-a-endpoints-de-gerenciamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 MinusRest â€” Endpoints de Gerenciamento
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-minusmigrator-a-schema-das-tabelas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 MinusMigrator â€” Schema das Tabelas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. File Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-roadmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Roadmap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Roadmap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-0-a-fundaaao-a-concluado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 0 â€” FundaÃ§Ã£o âœ… ConcluÃ­do
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-a-providers-reais-a-parcialmente-concluado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1 â€” Providers Reais âœ… Parcialmente ConcluÃ­do
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-a-resiliaancia-4-6-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2 â€” ResiliÃªncia (4-6 semanas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-3-a-escala-6-8-semanas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 3 â€” Escala (6-8 semanas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maturidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maturidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-comparativo-de-mercado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Comparativo de Mercado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Comparativo de Mercado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matriz-de-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matriz de Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analise-por-cenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AnÃ¡lise por CenÃ¡rio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preao-vs-concorrentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PreÃ§o vs Concorrentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-decisaes-arquiteturais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. DecisÃµes Arquiteturais
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. DecisÃµes Arquiteturais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-por-que-uma-interface-aonica-imensageria-e-nao-maoltiplas-interfaces-segregadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Por que uma interface Ãºnica (IMensageria) e nÃ£o mÃºltiplas interfaces segregadas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-por-que-nao-usar-generics-para-tipar-mensagens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Por que nÃ£o usar generics para tipar mensagens?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-por-que-outbox-e-nao-xa-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Por que Outbox e nÃ£o XA Transactions?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#104-por-que-nao-usar-somente-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 Por que nÃ£o usar somente JSON?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#105-concorraancia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 ConcorrÃªncia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#106-rastreamento-distribuado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 Rastreamento DistribuÃ­do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ConclusÃ£o
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="minusmessaging-a-arquitetura-de-mensageria-para-delphi">MinusMessaging â€” Arquitetura de Mensageria para Delphi<a class="headerlink" href="#minusmessaging-a-arquitetura-de-mensageria-para-delphi" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Status:</strong> Proposta TÃ©cnica v1.0
+<strong>PropÃ³sito:</strong> Camada de mensageria assÃ­ncrona multi-provider com integraÃ§Ã£o nativa ao ecossistema MinusFramework</p>
+</blockquote>
+<hr />
+<h2 id="sumario">SumÃ¡rio<a class="headerlink" href="#sumario" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#1-visÃ£o-geral">VisÃ£o Geral</a></li>
+<li><a href="#2-arquitetura">Arquitetura</a></li>
+<li><a href="#3-camada-core-abstraÃ§Ãµes">Camada Core (AbstraÃ§Ãµes)</a></li>
+<li><a href="#4-provedores-providers">Provedores (Providers)</a></li>
+<li><a href="#5-padrÃµes-de-confiabilidade">PadrÃµes de Confiabilidade</a></li>
+<li><a href="#6-integraÃ§Ã£o-com-o-ecossistema">IntegraÃ§Ã£o com o Ecossistema</a></li>
+<li><a href="#7-file-structure">File Structure</a></li>
+<li><a href="#8-roadmap">Roadmap</a></li>
+<li><a href="#9-comparativo-de-mercado">Comparativo de Mercado</a></li>
+<li><a href="#10-decisÃµes-arquiteturais">DecisÃµes Arquiteturais</a></li>
+</ol>
+<hr />
+<h2 id="1-visao-geral">1. VisÃ£o Geral<a class="headerlink" href="#1-visao-geral" title="Permanent link">&para;</a></h2>
+<h3 id="11-o-problema">1.1 O Problema<a class="headerlink" href="#11-o-problema" title="Permanent link">&para;</a></h3>
+<p>AplicaÃ§Ãµes Delphi modernas precisam de comunicaÃ§Ã£o assÃ­ncrona entre serviÃ§os, mas o ecossistema atual Ã© fragmentado:</p>
+<ul>
+<li><strong>Horse MQTT</strong> â€” sÃ³ MQTT, sem abstraÃ§Ã£o multi-broker</li>
+<li><strong>Hormon</strong> â€” sÃ³ in-memory, sem persistÃªncia nem integraÃ§Ã£o</li>
+<li><strong>RabbitMQ.Delphi</strong> â€” sÃ³ AMQP, binding direto sem camada de abstraÃ§Ã£o</li>
+<li>** implementaÃ§Ã£o manual** â€” cada projeto reinventa a roda</li>
+</ul>
+<h3 id="12-a-soluaao">1.2 A SoluÃ§Ã£o<a class="headerlink" href="#12-a-soluaao" title="Permanent link">&para;</a></h3>
+<p><strong>MinusMessaging</strong> â€” abstraÃ§Ã£o unificada sobre mÃºltiplos brokers, com:</p>
+<ul>
+<li>Interface <code>IMensageria</code> Ãºnica para publish/consume/subscribe</li>
+<li>Providers plugÃ¡veis: InMemory, Redis, RabbitMQ, MQTT, Kafka</li>
+<li>PadrÃµes embutidos: retry, DLQ, circuit breaker, outbox, saga</li>
+<li>IntegraÃ§Ã£o nativa com MinusORM, MinusFeatureFlags, MinusRest</li>
+</ul>
+<h3 id="13-princapios-arquiteturais">1.3 PrincÃ­pios Arquiteturais<a class="headerlink" href="#13-princapios-arquiteturais" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>PrincÃ­pio</th>
+<th>AplicaÃ§Ã£o</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Provider-agnostic</strong></td>
+<td>Core nÃ£o depende de nenhum broker; providers sÃ£o injeÃ§Ãµes</td>
+</tr>
+<tr>
+<td><strong>Retry by default</strong></td>
+<td>Toda operaÃ§Ã£o tem polÃ­tica de retry configurÃ¡vel</td>
+</tr>
+<tr>
+<td><strong>Dead Letter obrigatÃ³ria</strong></td>
+<td>Toda fila tem DLQ â€” mensagens falhas nunca morrem</td>
+</tr>
+<tr>
+<td><strong>Observabilidade</strong></td>
+<td>MÃ©tricas, tracing e health check em todos os providers</td>
+</tr>
+<tr>
+<td><strong>IdempotÃªncia</strong></td>
+<td>Mensagens devem ser seguras para reprocessamento</td>
+</tr>
+<tr>
+<td><strong>Transacional</strong></td>
+<td>Outbox garante consistÃªncia DB + mensageria</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-arquitetura">2. Arquitetura<a class="headerlink" href="#2-arquitetura" title="Permanent link">&para;</a></h2>
+<h3 id="21-diagrama-de-camadas">2.1 Diagrama de Camadas<a class="headerlink" href="#21-diagrama-de-camadas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>â”‚                        APLICAÃ‡ÃƒO CLIENTE                          â”‚
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>â”‚   TServicePedido, TServiceEmail, TServiceNotificacao              â”‚
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                            â”‚
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>â”‚                   MINUSMESSAGING CORE                            â”‚
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>â”‚  â”‚ IMensageriaâ”‚  â”‚  IFila     â”‚  â”‚  ITopico   â”‚  â”‚ IConsumidorâ”‚  â”‚
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>â”‚  â”‚ (Facade)   â”‚  â”‚ (Queue)    â”‚  â”‚ (Pub/Sub)  â”‚  â”‚ (Worker)  â”‚  â”‚
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>â”‚  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜  â”‚
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>â”‚        â”‚               â”‚               â”‚               â”‚        â”‚
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>â”‚  â”Œâ”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”  â”‚
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>â”‚  â”‚              TMessageBus (Orquestrador)                     â”‚  â”‚
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>â”‚  â”‚  - RetryPolicy / CircuitBreaker / DLQ / Outbox / Saga      â”‚  â”‚
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                               â”‚
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>â”‚                     PROVIDER LAYER                               â”‚
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>â”‚                                                                   â”‚
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â” â”‚
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>â”‚  â”‚ TProvider- â”‚  â”‚ TProviderâ”‚  â”‚ TProviderâ”‚  â”‚ TProviderâ”‚  â”‚ TProviderâ”‚ â”‚
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>â”‚  â”‚ InMemory   â”‚  â”‚ Redis    â”‚  â”‚ RabbitMQ â”‚  â”‚ MQTT   â”‚  â”‚ Kafkaâ”‚ â”‚
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”˜ â”‚
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>â”‚                                                                   â”‚
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>â”‚  â”‚  TProviderNuvem (SaaS Bridge: Amazon SQS, Azure SB, GCP)   â”‚  â”‚
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+</code></pre></div>
+<h3 id="22-fluxo-de-mensagem">2.2 Fluxo de Mensagem<a class="headerlink" href="#22-fluxo-de-mensagem" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Produtor                    MessageBus                    Provider
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    â”‚   bus.Publicar(evento)   â”‚                            â”‚
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    â”‚â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚                            â”‚
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    â”‚                           â”‚ 1. Serializa (JSON/Bin)    â”‚
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    â”‚                           â”‚ 2. Aplica Outbox (tx DB)  â”‚
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    â”‚                           â”‚ 3. provider.Enfileirar()   â”‚
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    â”‚                           â”‚â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    â”‚                           â”‚           ACK              â”‚
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    â”‚                           â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    â”‚â—„â”€â”€â”€ Resultado(OK/DLQ) â”€â”€â”€â”€â”‚                            â”‚
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>Consumidor                    MessageBus                    Provider
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    â”‚                           â”‚â—„â”€â”€â”€â”€â”€ Nova Mensagem â”€â”€â”€â”€â”€â”€â”€â”‚
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    â”‚ bus.Consumir(handler)    â”‚                            â”‚
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚                            â”‚
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    â”‚ [Processa]                â”‚                            â”‚
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    â”‚                           â”‚                            â”‚
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    â”‚ Ack / Nack                â”‚                            â”‚
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    â”‚â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–ºâ”‚                            â”‚
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    â”‚                           â”‚ Ack â†’ provider.Ack()       â”‚
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    â”‚                           â”‚ Nack â†’ Retry/DLQ           â”‚
+</code></pre></div>
+<h3 id="23-modelo-de-dados-core">2.3 Modelo de Dados (Core)<a class="headerlink" href="#23-modelo-de-dados-core" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">type</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="n">TTipoMensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tmEvento</span><span class="o">,</span><span class="w"> </span><span class="n">tmComando</span><span class="o">,</span><span class="w"> </span><span class="n">tmDocumento</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="n">TTipoEntrega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">tePeloMenosUma</span><span class="o">,</span><span class="w"> </span><span class="n">teNoMaximoUma</span><span class="o">,</span><span class="w"> </span><span class="n">teExatamenteUma</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="n">TStatusMensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">smPendente</span><span class="o">,</span><span class="w"> </span><span class="n">smProcessando</span><span class="o">,</span><span class="w"> </span><span class="n">smConcluida</span><span class="o">,</span><span class="w"> </span><span class="n">smFalha</span><span class="o">,</span><span class="w"> </span><span class="n">smDLQ</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="c1">// â”€â”€ Mensagem base â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="n">IMensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="p">[</span><span class="s">&#39;{...}&#39;</span><span class="p">]</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Id</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Tipo</span><span class="o">:</span><span class="w"> </span><span class="n">TTipoMensagem</span><span class="o">;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Nome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w">            </span><span class="c1">// &#39;pedido.criado&#39;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Versao</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">         </span><span class="c1">// Schema version</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">CorrelacaoId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span><span class="w">     </span><span class="c1">// Saga correlation</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">CausaId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span><span class="w">          </span><span class="c1">// Causa origem</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">CriadoEm</span><span class="o">:</span><span class="w"> </span><span class="kt">TDateTime</span><span class="o">;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Cabecalhos</span><span class="o">:</span><span class="w"> </span><span class="n">TDictionary</span><span class="o">&lt;</span><span class="k">string</span><span class="o">,</span><span class="w"> </span><span class="k">string</span><span class="o">&gt;;</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Corpo</span><span class="o">:</span><span class="w"> </span><span class="n">TValue</span><span class="o">;</span><span class="w">           </span><span class="c1">// Delphi RTTI value</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Rastreio</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w">        </span><span class="c1">// Trace context</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">  </span><span class="c1">// â”€â”€ ConfiguraÃ§Ã£o de fila â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">  </span><span class="n">TFilaConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">    </span><span class="n">Nome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">    </span><span class="n">TipoEntrega</span><span class="o">:</span><span class="w"> </span><span class="n">TTipoEntrega</span><span class="o">;</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span><span class="n">MaxRetentativas</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">        </span><span class="c1">// 0 = infinito</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span><span class="n">Backoff</span><span class="o">:</span><span class="w"> </span><span class="n">TBackoffPolicy</span><span class="o">;</span><span class="w">         </span><span class="c1">// TExponentialBackoff, TFixedBackoff</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="n">DLQ</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w">                     </span><span class="c1">// Nome da DLQ (auto-criada)</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span><span class="n">TTL</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">                    </span><span class="c1">// Time-to-live (segundos)</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">    </span><span class="n">PrefetchCount</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">          </span><span class="c1">// Max mensagens simultÃ¢neas</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">    </span><span class="n">Serializacao</span><span class="o">:</span><span class="w"> </span><span class="n">TFormatoSerializacao</span><span class="o">;</span><span class="w"> </span><span class="c1">// json, binÃ¡rio, msgpack</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">  </span><span class="c1">// â”€â”€ Dead Letter â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">  </span><span class="n">IMensagemDLQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span><span class="p">(</span><span class="n">IMensagem</span><span class="p">)</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Motivo</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Tentativas</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">UltimoErro</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">OriginalId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">DataFalha</span><span class="o">:</span><span class="w"> </span><span class="kt">TDateTime</span><span class="o">;</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<hr />
+<h2 id="3-camada-core-abstraaaes">3. Camada Core (AbstraÃ§Ãµes)<a class="headerlink" href="#3-camada-core-abstraaaes" title="Permanent link">&para;</a></h2>
+<h3 id="31-interface-principal-a-imensageria">3.1 Interface Principal â€” <code>IMensageria</code><a class="headerlink" href="#31-interface-principal-a-imensageria" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">type</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="c1">// Facade unificada â€” ponto de entrada para toda a aplicaÃ§Ã£o</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="n">IMensageria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="p">[</span><span class="s">&#39;{...}&#39;</span><span class="p">]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="c1">// â”€â”€ ProduÃ§Ã£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Publicar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ACorpo</span><span class="o">:</span><span class="w"> </span><span class="n">TValue</span><span class="o">;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ACabecalhos</span><span class="o">:</span><span class="w"> </span><span class="n">TDictionary</span><span class="o">&lt;</span><span class="k">string</span><span class="o">,</span><span class="k">string</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Publicar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AEvento</span><span class="o">:</span><span class="w"> </span><span class="n">IEvento</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="c1">// â”€â”€ Consumo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Consumir</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ACallback</span><span class="o">:</span><span class="w"> </span><span class="n">TProc</span><span class="o">&lt;</span><span class="n">IMensagem</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Consumir</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ACallback</span><span class="o">:</span><span class="w"> </span><span class="n">TFunc</span><span class="o">&lt;</span><span class="n">IMensagem</span><span class="o">,</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="c1">// True=Ack, False=Nack</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="c1">// â”€â”€ Subscribe (Pub/Sub) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Subscrever</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ATopico</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ACallback</span><span class="o">:</span><span class="w"> </span><span class="n">TProc</span><span class="o">&lt;</span><span class="n">IMensagem</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">PublicarNoTopico</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ATopico</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AMsg</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">    </span><span class="c1">// â”€â”€ Sagas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">IniciarSaga</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">AEventoInicial</span><span class="o">:</span><span class="w"> </span><span class="n">IEvento</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">ISaga</span><span class="o">;</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ContinuarSaga</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ACorrelacaoId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">ISaga</span><span class="o">;</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">    </span><span class="c1">// â”€â”€ Gerenciamento â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">RegistrarFila</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AConfig</span><span class="o">:</span><span class="w"> </span><span class="n">TFilaConfig</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">RemoverFila</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">StatusDaFila</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TFilaStatus</span><span class="o">;</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">LimparDLQ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ReenviarDLQ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="w">    </span><span class="c1">// â”€â”€ Lifecycle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Iniciar</span><span class="o">;</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Parar</span><span class="o">;</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">HealthCheck</span><span class="o">:</span><span class="w"> </span><span class="n">THealthCheckResultado</span><span class="o">;</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="32-provedor-provider-a-contrato">3.2 Provedor (Provider) â€” Contrato<a class="headerlink" href="#32-provedor-provider-a-contrato" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">type</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="c1">// Cada provedor implementa este contrato</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="n">IProvedorMensageria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="p">[</span><span class="s">&#39;{...}&#39;</span><span class="p">]</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="c1">// â”€â”€ AdministraÃ§Ã£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">CriarFila</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AConfig</span><span class="o">:</span><span class="w"> </span><span class="n">TFilaConfig</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">DeletarFila</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">CriarTopico</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">VincularFilaAoTopico</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">,</span><span class="w"> </span><span class="n">ATopico</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="c1">// â”€â”€ ProduÃ§Ã£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Enfileirar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">PublicarNoTopico</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ATopico</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="c1">// â”€â”€ Consumo â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ConsumirProximo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">      </span><span class="n">out</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span><span class="w"> </span><span class="c1">// blocking/non-blocking</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Ack</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Nack</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">AMotivo</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AReenfileirar</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">RejeitarDLQ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagemDLQ</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="c1">// â”€â”€ Health â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Conectado</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Ping</span><span class="o">:</span><span class="w"> </span><span class="kt">Int64</span><span class="o">;</span><span class="w"> </span><span class="c1">// latÃªncia em ms</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="33-serializaaao">3.3 SerializaÃ§Ã£o<a class="headerlink" href="#33-serializaaao" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">type</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="n">TFormatoSerializacao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">fsJson</span><span class="o">,</span><span class="w"> </span><span class="n">fsBinario</span><span class="o">,</span><span class="w"> </span><span class="n">fsMessagePack</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="n">ISerializadorMensagem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Serializar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TBytes</span><span class="o">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Desserializar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ADados</span><span class="o">:</span><span class="w"> </span><span class="n">TBytes</span><span class="o">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">AFormato</span><span class="o">:</span><span class="w"> </span><span class="n">TFormatoSerializacao</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="o">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<ul>
+<li><strong>JSON</strong>: padrÃ£o para interoperabilidade entre linguagens</li>
+<li><strong>BinÃ¡rio</strong>: performance mÃ¡xima entre apps Delphi</li>
+<li><strong>MessagePack</strong>: compactaÃ§Ã£o com suporte multi-linguagem</li>
+</ul>
+<h3 id="34-mensagens-sancronas-requestreply">3.4 Mensagens SÃ­ncronas (Request/Reply)<a class="headerlink" href="#34-mensagens-sancronas-requestreply" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">type</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="c1">// RPC sobre fila</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="n">IRpcCliente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">EnviarRequisicao</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">APayload</span><span class="o">:</span><span class="w"> </span><span class="n">TValue</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ATimeout</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="o">;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">ResponderRequisicao</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ARequisicao</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="o">;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">AResposta</span><span class="o">:</span><span class="w"> </span><span class="n">TValue</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<p>PadrÃ£o: fila temporÃ¡ria anÃ´nima com <code>ReplyTo</code> + <code>CorrelationId</code>. Timeout configurÃ¡vel, exceÃ§Ã£o se nÃ£o responder.</p>
+<hr />
+<h2 id="4-provedores-providers">4. Provedores (Providers)<a class="headerlink" href="#4-provedores-providers" title="Permanent link">&para;</a></h2>
+<h3 id="41-inmemory-a-tprovedormemoria">4.1 InMemory â€” <code>TProvedorMemoria</code><a class="headerlink" href="#41-inmemory-a-tprovedormemoria" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Backend</strong></td>
+<td><code>TThreadedQueue&lt;IMensagem&gt;</code> + <code>TDictionary&lt;string, TList&lt;TCallback&gt;&gt;</code></td>
+</tr>
+<tr>
+<td><strong>PersistÃªncia</strong></td>
+<td>âŒ VolÃ¡til (opcional: arquivo JSON para dev/test)</td>
+</tr>
+<tr>
+<td><strong>LatÃªncia</strong></td>
+<td>&lt; 1ms (mesmo processo)</td>
+</tr>
+<tr>
+<td><strong>ConcorrÃªncia</strong></td>
+<td><code>TMonitor</code> ou <code>TLock</code> por fila</td>
+</tr>
+<tr>
+<td><strong>Maturidade</strong></td>
+<td>ProtÃ³tipo / testes unitÃ¡rios / dev local</td>
+</tr>
+<tr>
+<td><strong>Roteamento</strong></td>
+<td>Direto por nome de fila/tÃ³pico</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-redis-a-tprovedorredis">4.2 Redis â€” <code>TProvedorRedis</code><a class="headerlink" href="#42-redis-a-tprovedorredis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Driver</strong></td>
+<td><code>Redis.Commons</code> + <code>Redis.Client</code> (delphiredis)</td>
+</tr>
+<tr>
+<td><strong>Queue</strong></td>
+<td><code>RPOPLPUSH</code> (filas atÃ´micas com backup)</td>
+</tr>
+<tr>
+<td><strong>Pub/Sub</strong></td>
+<td><code>SUBSCRIBE</code> / <code>PUBLISH</code> nativo</td>
+</tr>
+<tr>
+<td><strong>DLQ</strong></td>
+<td>Lista separada <code>fila:dql</code> + <code>BRPOPLPUSH</code> com timeout</td>
+</tr>
+<tr>
+<td><strong>Health</strong></td>
+<td><code>PING</code></td>
+</tr>
+<tr>
+<td><strong>Retry</strong></td>
+<td><code>ZSET</code> score = timestamp tentativa</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-rabbitmq-a-tprovedorrabbitmq">4.3 RabbitMQ â€” <code>TProvedorRabbitMQ</code><a class="headerlink" href="#43-rabbitmq-a-tprovedorrabbitmq" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Driver</strong></td>
+<td><code>RabbitMQ.Delphi</code> ou <code>RabbitMQ.Client</code></td>
+</tr>
+<tr>
+<td><strong>Queue</strong></td>
+<td><code>basic.publish</code> com <code>delivery-mode=2</code></td>
+</tr>
+<tr>
+<td><strong>Pub/Sub</strong></td>
+<td>Exchange <code>topic</code> + bindings</td>
+</tr>
+<tr>
+<td><strong>DLQ</strong></td>
+<td>Dead Letter Exchange nativo do RabbitMQ</td>
+</tr>
+<tr>
+<td><strong>Prefetch</strong></td>
+<td><code>basic.qos</code> com <code>prefetch-count</code></td>
+</tr>
+<tr>
+<td><strong>Confirm</strong></td>
+<td>Publisher confirms (<code>confirm.select</code>)</td>
+</tr>
+<tr>
+<td><strong>TX</strong></td>
+<td>AMQP transactions para outbox</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-mqtt-a-tprovedormqtt">4.4 MQTT â€” <code>TProvedorMQTT</code><a class="headerlink" href="#44-mqtt-a-tprovedormqtt" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Driver</strong></td>
+<td><code>TMQTTClient</code> (Embarcadero) ou <code>mqtt-delphi</code></td>
+</tr>
+<tr>
+<td><strong>QoS</strong></td>
+<td>0, 1, 2 (mapeado para entrega)</td>
+</tr>
+<tr>
+<td><strong>Retain</strong></td>
+<td>Mensagens retidas para novos subscribers</td>
+</tr>
+<tr>
+<td><strong>Will</strong></td>
+<td>Last Will para detecÃ§Ã£o de queda</td>
+</tr>
+<tr>
+<td><strong>DLQ</strong></td>
+<td>Simulada via tÃ³pico <code>$dql/{fila}</code></td>
+</tr>
+<tr>
+<td><strong>PersistÃªncia</strong></td>
+<td>Session state no broker</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-kafka-a-tprovedorkafka">4.5 Kafka â€” <code>TProvedorKafka</code><a class="headerlink" href="#45-kafka-a-tprovedorkafka" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Driver</strong></td>
+<td><code>librdkafka</code> (C binding via <code>rdkafka.h</code>)</td>
+</tr>
+<tr>
+<td><strong>Consumer Group</strong></td>
+<td><code>GROUP_ID</code> + offset commit</td>
+</tr>
+<tr>
+<td><strong>Offset</strong></td>
+<td><code>auto.offset.reset=earliest</code></td>
+</tr>
+<tr>
+<td><strong>DLQ</strong></td>
+<td>TÃ³pico <code>{topico}.DLQ</code></td>
+</tr>
+<tr>
+<td><strong>Batch</strong></td>
+<td>ProduÃ§Ã£o em lote configurÃ¡vel</td>
+</tr>
+<tr>
+<td><strong>Schema Registry</strong></td>
+<td>Suporte futuro para Avro/Protobuf</td>
+</tr>
+</tbody>
+</table>
+<h3 id="46-tabela-comparativa-de-providers">4.6 Tabela Comparativa de Providers<a class="headerlink" href="#46-tabela-comparativa-de-providers" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>PersistÃªncia</th>
+<th>LatÃªncia</th>
+<th>Throughput</th>
+<th>Ordem Garantida</th>
+<th>DLQ Nativa</th>
+<th>Setup</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>InMemory</td>
+<td>âŒ</td>
+<td>~0.1ms</td>
+<td>500k msg/s</td>
+<td>âœ…</td>
+<td>Simulada</td>
+<td>Nenhum</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>âœ… Disco/RAM</td>
+<td>~1ms</td>
+<td>100k msg/s</td>
+<td>âŒ</td>
+<td>ZSET</td>
+<td>Docker</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>âœ… Disco</td>
+<td>~5ms</td>
+<td>50k msg/s</td>
+<td>âœ…</td>
+<td>Exchange DLX</td>
+<td>Docker</td>
+</tr>
+<tr>
+<td>MQTT</td>
+<td>âœ… Broker</td>
+<td>~10ms</td>
+<td>10k msg/s</td>
+<td>âŒ</td>
+<td>TÃ³pico Will</td>
+<td>Mosquitto</td>
+</tr>
+<tr>
+<td>Kafka</td>
+<td>âœ… Disco log</td>
+<td>~20ms</td>
+<td>1M msg/s</td>
+<td>âœ… PartiÃ§Ã£o</td>
+<td>TÃ³pico <code>.DLQ</code></td>
+<td>ZooKeeper/KRaft</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-padraes-de-confiabilidade">5. PadrÃµes de Confiabilidade<a class="headerlink" href="#5-padraes-de-confiabilidade" title="Permanent link">&para;</a></h2>
+<h3 id="51-retry-com-backoff">5.1 Retry com Backoff<a class="headerlink" href="#51-retry-com-backoff" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">type</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="n">TBackoffPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="kp">abstract</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ProximoIntervalo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ATentativa</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w"> </span><span class="kp">virtual</span><span class="o">;</span><span class="w"> </span><span class="kp">abstract</span><span class="o">;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">  </span><span class="n">TExponentialBackoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TBackoffPolicy</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="kp">private</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="n">FBaseMs</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="n">FMaxMs</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="kp">public</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ProximoIntervalo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ATentativa</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w"> </span><span class="kp">override</span><span class="o">;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span><span class="c1">// 1Âª: 1s, 2Âª: 2s, 3Âª: 4s, 4Âª: 8s... atÃ© FMaxMs</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span><span class="n">TFixedBackoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TBackoffPolicy</span><span class="p">)</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="c1">// Intervalo fixo entre tentativas</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">  </span><span class="n">TJitterBackoff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TBackoffPolicy</span><span class="p">)</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="w">    </span><span class="c1">// Exponencial + random(0, intervalo) para evitar thundering herd</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<p>Fluxo:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Consumidor.Nack â†’ MessageBus â†’ RetryPolicy â†’ DLQ
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>                    â”‚                          â”‚
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                    â”œâ”€â”€ Tentativa &lt;= Max â”€â”€â”€â”€â”€â–ºâ”‚ Reenfileira com atraso
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>                    â”‚                          â”‚
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>                    â””â”€â”€ Tentativa &gt; Max â”€â”€â”€â”€â”€â”€â–ºâ”‚ Envia para DLQ
+</code></pre></div></p>
+<h3 id="52-dead-letter-queue-dlq">5.2 Dead Letter Queue (DLQ)<a class="headerlink" href="#52-dead-letter-queue-dlq" title="Permanent link">&para;</a></h3>
+<p>Regras de negÃ³cio para DLQ:
+- <strong>Mensagem expirou TTL</strong> â†’ DLQ automÃ¡tica
+- <strong>MÃ¡ximo de retries excedido</strong> â†’ DLQ
+- <strong>Erro de desserializaÃ§Ã£o</strong> â†’ DLQ imediato (sem retry)
+- <strong>Erro de aplicaÃ§Ã£o</strong> â†’ Retry configurÃ¡vel, depois DLQ</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">type</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="n">IGerenciadorDLQ</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">EnviarParaDLQ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFilaOrigem</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="o">;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">AMotivo</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ATentativas</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AErro</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ListarDLQ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TArray</span><span class="o">&lt;</span><span class="n">IMensagemDLQ</span><span class="o">&gt;;</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Reenviar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ReenviarTodas</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Limpar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">TotalDLQ</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AFila</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="53-outbox-pattern">5.3 Outbox Pattern<a class="headerlink" href="#53-outbox-pattern" title="Permanent link">&para;</a></h3>
+<p>Garante consistÃªncia transacional entre banco de dados e mensageria.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">// Fluxo:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1">// 1. BEGIN TRANSACTION</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1">// 2. INSERT na tabela de negÃ³cio (ex: pedidos)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1">// 3. INSERT na tabela outbox (mensagem_pendente)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">// 4. COMMIT</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1">// 5. Publica mensagem (se falhar, OutboxWorker pega depois)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="k">type</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">  </span><span class="n">IOutbox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Adicionar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AMensagem</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ObterPendentes</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ALimite</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">TArray</span><span class="o">&lt;</span><span class="n">IMensagem</span><span class="o">&gt;;</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">MarcarEnviada</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">MarcarFalha</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">AErro</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">TotalPendentes</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">  </span><span class="c1">// ImplementaÃ§Ã£o via MinusORM</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">  </span><span class="n">TOutboxORM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TInterfacedObject</span><span class="o">,</span><span class="w"> </span><span class="n">IOutbox</span><span class="p">)</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span><span class="c1">// Usa TRepositorioBase&lt;TMensagemPendente&gt;</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="c1">// Tabela: mensageria_outbox</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="c1">// Worker thread: a cada 1s, busca pendentes e reenvia</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="54-saga-pattern">5.4 Saga Pattern<a class="headerlink" href="#54-saga-pattern" title="Permanent link">&para;</a></h3>
+<p>Dois modos:</p>
+<h4 id="coreografia-event-driven">Coreografia (event-driven)<a class="headerlink" href="#coreografia-event-driven" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>PedidoCriado â†’ EstoqueReservado â†’ PagamentoConfirmado â†’ Notificado
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>     â”‚               â”‚                    â”‚                  â”‚
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>     â–¼               â–¼                    â–¼                  â–¼
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>ServicoA        ServicoB             ServicoC           ServicoD
+</code></pre></div>
+<h4 id="orquestraaao-saga-centralizada">OrquestraÃ§Ã£o (saga centralizada)<a class="headerlink" href="#orquestraaao-saga-centralizada" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">type</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="n">ISaga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Id</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="o">;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Nome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Estado</span><span class="o">:</span><span class="w"> </span><span class="n">TEstadoSaga</span><span class="o">;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="c1">// Passos</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Passo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ANome</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">AAcao</span><span class="o">:</span><span class="w"> </span><span class="n">TFunc</span><span class="o">&lt;</span><span class="n">ISagaContext</span><span class="o">,</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">&gt;;</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ACompensacao</span><span class="o">:</span><span class="w"> </span><span class="n">TProc</span><span class="o">&lt;</span><span class="n">ISagaContext</span><span class="o">&gt;</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">ISaga</span><span class="o">;</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">    </span><span class="c1">// Executa todos os passos em ordem</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Executar</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">    </span><span class="c1">// Se falhar, executa compensaÃ§Ãµes em ordem reversa</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Compensar</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="c1">// Exemplo:</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="n">Saga</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">bus</span><span class="o">.</span><span class="n">IniciarSaga</span><span class="p">(</span><span class="s">&#39;cadastro.usuario&#39;</span><span class="p">)</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">  </span><span class="o">.</span><span class="n">Passo</span><span class="p">(</span><span class="s">&#39;criar.usuario&#39;</span><span class="o">,</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">    </span><span class="k">function</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">    </span><span class="k">begin</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">      </span><span class="n">Repo</span><span class="o">.</span><span class="n">Salvar</span><span class="p">(</span><span class="n">Usuario</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">      </span><span class="bp">Result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">True</span><span class="o">;</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">    </span><span class="k">end</span><span class="o">,</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">    </span><span class="k">procedure</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">    </span><span class="k">begin</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">      </span><span class="n">Repo</span><span class="o">.</span><span class="n">Excluir</span><span class="p">(</span><span class="n">Usuario</span><span class="o">.</span><span class="n">Id</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">    </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">  </span><span class="o">.</span><span class="n">Passo</span><span class="p">(</span><span class="s">&#39;enviar.email&#39;</span><span class="o">,</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">    </span><span class="k">function</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">    </span><span class="k">begin</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">      </span><span class="n">bus</span><span class="o">.</span><span class="n">Publicar</span><span class="p">(</span><span class="s">&#39;email.boasvindas&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">Usuario</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="w">      </span><span class="bp">Result</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">True</span><span class="o">;</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">    </span><span class="k">end</span><span class="o">,</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="w">    </span><span class="k">procedure</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">    </span><span class="k">begin</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="w">      </span><span class="c1">// compensaÃ§Ã£o: marca email como cancelado</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="w">    </span><span class="k">end</span><span class="p">)</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="w">  </span><span class="o">.</span><span class="n">Executar</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="55-circuit-breaker">5.5 Circuit Breaker<a class="headerlink" href="#55-circuit-breaker" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">type</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="n">TCircuitState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">csFechado</span><span class="o">,</span><span class="w"> </span><span class="n">csAberto</span><span class="o">,</span><span class="w"> </span><span class="n">csMeioAberto</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="n">ICircuitBreaker</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Estado</span><span class="o">:</span><span class="w"> </span><span class="n">TCircuitState</span><span class="o">;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Executar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AOperacao</span><span class="o">:</span><span class="w"> </span><span class="n">TProc</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">FalhasConsecutivas</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">Resetar</span><span class="o">;</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="w">  </span><span class="c1">// ConfiguraÃ§Ã£o:</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="w">  </span><span class="c1">// - Threshold: 5 falhas consecutivas</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="w">  </span><span class="c1">// - Timeout: 30 segundos (aberto â†’ meio-aberto)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="w">  </span><span class="c1">// - Half-open: 1 requisiÃ§Ã£o teste</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="w">  </span><span class="c1">// Se passar â†’ fecha; se falhar â†’ volta aberto</span>
+</code></pre></div>
+<h3 id="56-idempotaancia">5.6 IdempotÃªncia<a class="headerlink" href="#56-idempotaancia" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">type</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="n">IRepositorioIdempotencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">JaProcessada</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">Processar</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AId</span><span class="o">:</span><span class="w"> </span><span class="n">TGUID</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">Boolean</span><span class="o">;</span><span class="w"> </span><span class="c1">// INSERT se nÃ£o existe</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">  </span><span class="c1">// ImplementaÃ§Ã£o via MinusORM:</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">  </span><span class="c1">// CREATE TABLE mensageria_idempotencia (</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">  </span><span class="c1">//   mensagem_id CHAR(38) PRIMARY KEY,</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">  </span><span class="c1">//   processado_em TIMESTAMP</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">  </span><span class="c1">// );</span>
+</code></pre></div>
+<hr />
+<h2 id="6-integraaao-com-o-ecossistema">6. IntegraÃ§Ã£o com o Ecossistema<a class="headerlink" href="#6-integraaao-com-o-ecossistema" title="Permanent link">&para;</a></h2>
+<h3 id="61-minusorm-a-outbox-idempotaancia-sagas">6.1 MinusORM â€” Outbox + IdempotÃªncia + Sagas<a class="headerlink" href="#61-minusorm-a-outbox-idempotaancia-sagas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// Outbox usa TRepositorioBase&lt;TMensagemPendente&gt;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">TRepositorioMensagemPendente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TRepositorioBase</span><span class="o">&lt;</span><span class="n">TMensagemPendente</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1">// IdempotÃªncia usa TRepositorioBase&lt;TIdempotencia&gt;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">TRepositorioIdempotencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TRepositorioBase</span><span class="o">&lt;</span><span class="n">TIdempotencia</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1">// Saga estado usa TRepositorioBase&lt;TSagaEstado&gt;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="n">TRepositorioSaga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">class</span><span class="p">(</span><span class="n">TRepositorioBase</span><span class="o">&lt;</span><span class="n">TSagaEstado</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="62-minusfeatureflags-a-controle-de-consumidores">6.2 MinusFeatureFlags â€” Controle de Consumidores<a class="headerlink" href="#62-minusfeatureflags-a-controle-de-consumidores" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">// Desabilitar consumidor sem deploy</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">if</span><span class="w"> </span><span class="n">FeatureFlags</span><span class="o">.</span><span class="n">EstaHabilitado</span><span class="p">(</span><span class="s">&#39;consumidor.email&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="n">bus</span><span class="o">.</span><span class="n">Consumir</span><span class="p">(</span><span class="s">&#39;email.confirmacao&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">HandlerEmail</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1">// Routing dinÃ¢mico por flag</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="k">if</span><span class="w"> </span><span class="n">FeatureFlags</span><span class="o">.</span><span class="n">EstaHabilitado</span><span class="p">(</span><span class="s">&#39;fila.nova&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="n">bus</span><span class="o">.</span><span class="n">RegistrarFila</span><span class="p">(</span><span class="n">TFilaConfig</span><span class="o">.</span><span class="n">Nova</span><span class="p">(</span><span class="s">&#39;pedido.v2&#39;</span><span class="p">))</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="k">else</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">  </span><span class="n">bus</span><span class="o">.</span><span class="n">RegistrarFila</span><span class="p">(</span><span class="n">TFilaConfig</span><span class="o">.</span><span class="n">Herdada</span><span class="p">(</span><span class="s">&#39;pedido.v1&#39;</span><span class="p">))</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="63-minusrest-a-endpoints-de-gerenciamento">6.3 MinusRest â€” Endpoints de Gerenciamento<a class="headerlink" href="#63-minusrest-a-endpoints-de-gerenciamento" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// Dashboard REST embutido</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1">// GET  /api/messageria/filas           â†’ lista filas + status</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1">// GET  /api/messageria/fila/:nome       â†’ detalhe da fila</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1">// GET  /api/messageria/fila/:nome/dql   â†’ mensagens na DLQ</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="c1">// POST /api/messageria/fila/:nome/dql/:id/reenviar</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="c1">// POST /api/messageria/publicar         â†’ publicar mensagem avulsa</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1">// GET  /api/messageria/health           â†’ health check</span>
+</code></pre></div>
+<h3 id="64-minusmigrator-a-schema-das-tabelas">6.4 MinusMigrator â€” Schema das Tabelas<a class="headerlink" href="#64-minusmigrator-a-schema-das-tabelas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// Migration 001: infraestrutura de mensageria</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1">// Tabelas:</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1">//   mensageria_outbox</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1">//   mensageria_idempotencia</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="c1">//   mensageria_saga_estado</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="c1">//   mensageria_saga_log</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1">//   mensageria_dlq_log</span>
+</code></pre></div>
+<hr />
+<h2 id="7-file-structure">7. File Structure<a class="headerlink" href="#7-file-structure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>Source/
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>â”œâ”€â”€ Core/                              # JÃ¡ existe (ORM)
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>â””â”€â”€ Messaging/                         # Novo
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    â”œâ”€â”€ MF.Messaging.Types.pas         # Enums, records, IMensagem
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    â”œâ”€â”€ MF.Messaging.Core.pas          # TMessageBus, IMensageria
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    â”œâ”€â”€ MF.Messaging.Serialization.pas # ISerializadorMensagem
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    â”œâ”€â”€ MF.Messaging.Config.pas        # TFilaConfig, TTipoEntrega
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    â”‚
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    â”œâ”€â”€ Reliability/
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Retry.pas     # TBackoffPolicy, TExponentialBackoff
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    â”‚   â”œâ”€â”€ MF.Messaging.DLQ.pas       # IGerenciadorDLQ
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    â”‚   â”œâ”€â”€ MF.Messaging.CircuitBreaker.pas
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Outbox.pas    # IOutbox + TOutboxORM
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    â”‚   â””â”€â”€ MF.Messaging.Saga.pas      # ISaga, TOrquestradorSaga
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>    â”‚
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>    â”œâ”€â”€ Providers/
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Provider.InMemory.pas
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Provider.Redis.pas
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Provider.RabbitMQ.pas
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Provider.MQTT.pas
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>    â”‚   â””â”€â”€ MF.Messaging.Provider.Kafka.pas
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>    â”‚
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>    â”œâ”€â”€ Integration/
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Integration.ORM.pas      # Outbox, IdempotÃªncia
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>    â”‚   â”œâ”€â”€ MF.Messaging.Integration.FeatureFlags.pas
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>    â”‚   â””â”€â”€ MF.Messaging.Integration.RestAPI.pas  # Endpoints Horse
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>    â”‚
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a>    â””â”€â”€ Monitor/
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>        â”œâ”€â”€ MF.Messaging.Metrics.pas    # Contadores, histogramas
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a>        â””â”€â”€ MF.Messaging.HealthCheck.pas # THealthCheckMessaging
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a>Packages/
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a>    MinusMessaging_Runtime.dpk
+<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a>    MinusMessaging_Design.dpk
+<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a>
+<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>Tests/
+<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a>    Test.Messaging/
+<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a>        Test.Messaging.Core.pas
+<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a>        Test.Messaging.Outbox.pas
+<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a>        Test.Messaging.Saga.pas
+<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a>        Test.Messaging.Providers.pas
+<a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a>        Test.Messaging.DLQ.pas
+</code></pre></div>
+<hr />
+<h2 id="8-roadmap">8. Roadmap<a class="headerlink" href="#8-roadmap" title="Permanent link">&para;</a></h2>
+<h3 id="fase-0-a-fundaaao-a-concluado">Fase 0 â€” FundaÃ§Ã£o âœ… ConcluÃ­do<a class="headerlink" href="#fase-0-a-fundaaao-a-concluado" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Core: <code>IMensagem</code>, <code>IMensageria</code>, <code>IProvedorMensageria</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>TMessageBus</code> â€” orquestrador com retry + DLQ</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>TProvedorMemoria</code> â€” testes e protÃ³tipo funcional</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> SerializaÃ§Ã£o JSON + BinÃ¡ria (<code>TSerializadorBinario</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Pub/Sub (tÃ³picos, assinaturas, cancelamento)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> DLQ com reenvio (evita duplicatas com novo GUID)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Testes unitÃ¡rios (21 testes DUnitX)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> CLI <code>MinusMessaging_CLI.exe</code> â€” publish/consume/status</li>
+</ul>
+<h3 id="fase-1-a-providers-reais-a-parcialmente-concluado">Fase 1 â€” Providers Reais âœ… Parcialmente ConcluÃ­do<a class="headerlink" href="#fase-1-a-providers-reais-a-parcialmente-concluado" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>TProvedorRedis</code> â€” filas via protocolo RESP (LPUSH/RPOP/LLEN)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>TProvedorRabbitMQ</code> â€” filas via AMQP 0.9.1 (Queue.Declare/Delete, Basic.Publish/Get)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Outbox pattern com MinusORM</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> IdempotÃªncia</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Health check integrado</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> MÃ©tricas: contadores por fila, latÃªncia, taxa de DLQ</li>
+</ul>
+<h3 id="fase-2-a-resiliaancia-4-6-semanas">Fase 2 â€” ResiliÃªncia (4-6 semanas)<a class="headerlink" href="#fase-2-a-resiliaancia-4-6-semanas" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Saga coreografia + orquestraÃ§Ã£o</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Circuit breaker</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>TProvedorMQTT</code> â€” QoS 0/1/2, will, retain</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> RequisiÃ§Ã£o/Resposta sÃ­ncrona (RPC)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Dashboard REST embutido (Horse)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> DLQ com reenvio via API</li>
+</ul>
+<h3 id="fase-3-a-escala-6-8-semanas">Fase 3 â€” Escala (6-8 semanas)<a class="headerlink" href="#fase-3-a-escala-6-8-semanas" title="Permanent link">&para;</a></h3>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>TProvedorKafka</code> â€” consumer groups, offset commit, batch</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Streaming SSE (Server-Sent Events) para UI em tempo real</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Tracer distribuÃ­do (OpenTelemetry compatÃ­vel)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Benchmark pÃºblico vs concorrentes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Pacotes BPL + GetIt</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> IDE Expert para RAD Studio</li>
+</ul>
+<h3 id="maturidade">Maturidade<a class="headerlink" href="#maturidade" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Fase 0 â”€â”€â”€â–º Fase 1 â”€â”€â”€â–º Fase 2 â”€â”€â”€â–º Fase 3
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>  â”‚           â”‚           â”‚           â”‚
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>  â–¼           â–¼           â–¼           â–¼
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>âœ… Core     âœ… Redis    âŒ Saga     âŒ Kafka
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>âœ… Pub/Sub  âœ… RabbitMQ âŒ MQTT     âŒ Streaming
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>âœ… DLQ      âœ… Outbox   âŒ RPC      âŒ Tracing
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>âœ… Serial   âŒ Health   âŒ Dashboard âŒ Benchmark
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>âœ… Testes   âŒ Metrics
+</code></pre></div>
+<hr />
+<h2 id="9-comparativo-de-mercado">9. Comparativo de Mercado<a class="headerlink" href="#9-comparativo-de-mercado" title="Permanent link">&para;</a></h2>
+<h3 id="matriz-de-features">Matriz de Features<a class="headerlink" href="#matriz-de-features" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>MinusMessaging</th>
+<th>Horse MQTT</th>
+<th>Hormon</th>
+<th>RabbitMQ.Delphi</th>
+<th>MassTransit (.NET)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Multi-provider</strong></td>
+<td>âœ… 5 providers</td>
+<td>âŒ SÃ³ MQTT</td>
+<td>âŒ SÃ³ memÃ³ria</td>
+<td>âŒ SÃ³ AMQP</td>
+<td>âœ… RabbitMQ + Azure</td>
+</tr>
+<tr>
+<td><strong>Linguagem</strong></td>
+<td><strong>Delphi</strong></td>
+<td>Delphi</td>
+<td>Delphi</td>
+<td>Delphi</td>
+<td>.NET</td>
+</tr>
+<tr>
+<td><strong>LicenÃ§a</strong></td>
+<td><strong>MIT</strong></td>
+<td>MIT</td>
+<td>MIT</td>
+<td>?</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>PreÃ§o</strong></td>
+<td><strong>GrÃ¡tis (Core)</strong></td>
+<td>GrÃ¡tis</td>
+<td>GrÃ¡tis</td>
+<td>GrÃ¡tis</td>
+<td>GrÃ¡tis</td>
+</tr>
+<tr>
+<td><strong>DLQ Nativa</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>Retry Policy</strong></td>
+<td>âœ… Exponencial/Jitter</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>Circuit Breaker</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>Outbox Pattern</strong></td>
+<td>âœ… ORM integrado</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>Saga</strong></td>
+<td>âœ… Coreografia + OrquestraÃ§Ã£o</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>IdempotÃªncia</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>SerializaÃ§Ã£o</strong></td>
+<td>JSON/BinÃ¡rio/MsgPack</td>
+<td>JSON</td>
+<td>JSON</td>
+<td>BinÃ¡rio</td>
+<td>JSON/Bin</td>
+</tr>
+<tr>
+<td><strong>RPC (Request/Reply)</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>Health Check</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>MÃ©tricas</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ… Prometheus</td>
+</tr>
+<tr>
+<td><strong>Dashboard REST</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+</tr>
+<tr>
+<td><strong>OpenTelemetry</strong></td>
+<td>Roadmap</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âœ…</td>
+</tr>
+<tr>
+<td><strong>IntegraÃ§Ã£o ORM</strong></td>
+<td>âœ… Nativa</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ (EF via terceiros)</td>
+</tr>
+<tr>
+<td><strong>Feature Flags</strong></td>
+<td>âœ… Integrado</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+</tr>
+<tr>
+<td><strong>DocumentaÃ§Ã£o PT-BR</strong></td>
+<td>âœ…</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+<td>âŒ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="analise-por-cenario">AnÃ¡lise por CenÃ¡rio<a class="headerlink" href="#analise-por-cenario" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>CenÃ¡rio</th>
+<th>RecomendaÃ§Ã£o</th>
+<th>Motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AplicaÃ§Ã£o Delphi desktop com fila local</td>
+<td><strong>MinusMessaging InMemory</strong></td>
+<td>Zero dependÃªncia, ~0.1ms latÃªncia</td>
+</tr>
+<tr>
+<td>MicroserviÃ§os Delphi + RabbitMQ</td>
+<td><strong>MinusMessaging RabbitMQ</strong></td>
+<td>DLX nativa, ordering guarantees, AMQP</td>
+</tr>
+<tr>
+<td>IoT / sensores com MQTT</td>
+<td><strong>MinusMessaging MQTT</strong></td>
+<td>QoS 0/1/2, retain, will, leve</td>
+</tr>
+<tr>
+<td>Event sourcing / stream pesado</td>
+<td><strong>MinusMessaging Kafka</strong></td>
+<td>Log append-only, replay, partiÃ§Ãµes</td>
+</tr>
+<tr>
+<td>Cache + fila leve (um servidor)</td>
+<td><strong>MinusMessaging Redis</strong></td>
+<td>Menos infra, mesmo Redis do cache</td>
+</tr>
+<tr>
+<td>Precisa de saga distribuÃ­da</td>
+<td><strong>MinusMessaging</strong></td>
+<td>Ãšnico no Delphi com suporte a saga</td>
+</tr>
+<tr>
+<td>Equipe .NET</td>
+<td><strong>MassTransit</strong></td>
+<td>Ecossistema .NET maduro</td>
+</tr>
+<tr>
+<td>SÃ³ precisa publicar/consumir MQTT</td>
+<td><strong>Horse MQTT</strong></td>
+<td>Leve, direto, sem overhead</td>
+</tr>
+</tbody>
+</table>
+<h3 id="preao-vs-concorrentes">PreÃ§o vs Concorrentes<a class="headerlink" href="#preao-vs-concorrentes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>GrÃ¡tis?</th>
+<th>PreÃ§o</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MinusMessaging Community</strong></td>
+<td>âœ… MIT</td>
+<td><strong>GrÃ¡tis</strong> (InMemory + 1 provider)</td>
+</tr>
+<tr>
+<td><strong>MinusMessaging Pro</strong></td>
+<td>âŒ</td>
+<td>R$ 149/ano (todos providers + saga + dashboard)</td>
+</tr>
+<tr>
+<td><strong>Horse MQTT</strong></td>
+<td>âœ… MIT</td>
+<td>GrÃ¡tis</td>
+</tr>
+<tr>
+<td><strong>Hormon</strong></td>
+<td>âœ… ?</td>
+<td>GrÃ¡tis</td>
+</tr>
+<tr>
+<td><strong>RabbitMQ.Delphi</strong></td>
+<td>âœ… ?</td>
+<td>GrÃ¡tis</td>
+</tr>
+<tr>
+<td><strong>MassTransit</strong></td>
+<td>âœ… MIT</td>
+<td>GrÃ¡tis</td>
+</tr>
+<tr>
+<td><strong>NServiceBus</strong></td>
+<td>âŒ</td>
+<td>$2,500+/ano</td>
+</tr>
+<tr>
+<td><strong>Azure Service Bus</strong></td>
+<td>âŒ</td>
+<td>~$10/mÃªs (Standard)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-decisaes-arquiteturais">10. DecisÃµes Arquiteturais<a class="headerlink" href="#10-decisaes-arquiteturais" title="Permanent link">&para;</a></h2>
+<h3 id="101-por-que-uma-interface-aonica-imensageria-e-nao-maoltiplas-interfaces-segregadas">10.1 Por que uma interface Ãºnica (<code>IMensageria</code>) e nÃ£o mÃºltiplas interfaces segregadas?<a class="headerlink" href="#101-por-que-uma-interface-aonica-imensageria-e-nao-maoltiplas-interfaces-segregadas" title="Permanent link">&para;</a></h3>
+<p><strong>DecisÃ£o:</strong> Facade unificada.</p>
+<p>A interface Ãºnica simplifica a injeÃ§Ã£o de dependÃªncia em toda a aplicaÃ§Ã£o. O <code>TMessageBus</code> internamente delega para providers especÃ­ficos. Se no futuro houver necessidade de segregaÃ§Ã£o, pode-se extrair interfaces especializadas sem quebrar compatibilidade:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">type</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="n">IMensageria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span><span class="w">  </span><span class="c1">// Facade â†’ uso 90% dos casos</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="n">IProdutor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span><span class="w">    </span><span class="c1">// Especializada â†’ sÃ³ publica</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="n">IConsumidor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span><span class="w">  </span><span class="c1">// Especializada â†’ sÃ³ consome</span>
+</code></pre></div>
+<h3 id="102-por-que-nao-usar-generics-para-tipar-mensagens">10.2 Por que nÃ£o usar generics para tipar mensagens?<a class="headerlink" href="#102-por-que-nao-usar-generics-para-tipar-mensagens" title="Permanent link">&para;</a></h3>
+<p><strong>DecisÃ£o:</strong> <code>TValue</code> (RTTI) em vez de <code>T&lt;T&gt;</code>.</p>
+<p>Generics em Delphi nÃ£o funcionam bem como interface variance. <code>TValue</code> + RTTI permite que o mesmo MessageBus aceite qualquer tipo sem acoplamento de unidade:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">// âŒ TMessageBus&lt;T&gt; exige unit genÃ©rica, complica BPL</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="c1">// âœ… IMensagem.Corpo as TValue â†’ RTTI â†’ qualquer tipo</span>
+</code></pre></div>
+<p>O cliente faz o cast no callback:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">bus</span><span class="o">.</span><span class="n">Consumir</span><span class="p">(</span><span class="s">&#39;pedido.criado&#39;</span><span class="o">,</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="k">procedure</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AMsg</span><span class="o">:</span><span class="w"> </span><span class="n">IMensagem</span><span class="p">)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="k">var</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="n">LPedido</span><span class="o">:</span><span class="w"> </span><span class="n">TPedido</span><span class="o">;</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="k">begin</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">    </span><span class="n">LPedido</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">AMsg</span><span class="o">.</span><span class="n">Corpo</span><span class="o">.</span><span class="n">AsType</span><span class="o">&lt;</span><span class="n">TPedido</span><span class="o">&gt;;</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="c1">// processa</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">  </span><span class="k">end</span><span class="p">)</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="103-por-que-outbox-e-nao-xa-transactions">10.3 Por que Outbox e nÃ£o XA Transactions?<a class="headerlink" href="#103-por-que-outbox-e-nao-xa-transactions" title="Permanent link">&para;</a></h3>
+<p><strong>DecisÃ£o:</strong> Outbox Ã© portÃ¡vel entre todos os providers.</p>
+<p>XA Transactions funcionam apenas com bancos e brokers que suportam o padrÃ£o (poucos). Outbox funciona com qualquer provider e qualquer banco, sem depender de coordenador de transaÃ§Ã£o distribuÃ­da.</p>
+<h3 id="104-por-que-nao-usar-somente-json">10.4 Por que nÃ£o usar somente JSON?<a class="headerlink" href="#104-por-que-nao-usar-somente-json" title="Permanent link">&para;</a></h3>
+<p><strong>DecisÃ£o:</strong> SerializaÃ§Ã£o plugÃ¡vel, mas JSON como default.</p>
+<ul>
+<li><strong>JSON</strong>: debugÃ¡vel, interoperÃ¡vel, schema evolution simples</li>
+<li><strong>BinÃ¡rio</strong>: performance (sem parse), compacto</li>
+<li><strong>MessagePack</strong>: melhor dos dois mundos</li>
+</ul>
+<h3 id="105-concorraancia">10.5 ConcorrÃªncia<a class="headerlink" href="#105-concorraancia" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">type</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="n">TConsumidorConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="n">ThreadPoolSize</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">       </span><span class="c1">// Default: CPU * 2</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="n">PrefetchCount</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">        </span><span class="c1">// Max mensagens simultÃ¢neas por thread</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">    </span><span class="n">BatchSize</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">            </span><span class="c1">// Quantas ler por poll (Kafka/RabbitMQ)</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span><span class="n">ShutdownTimeout</span><span class="o">:</span><span class="w"> </span><span class="kt">Integer</span><span class="o">;</span><span class="w">      </span><span class="c1">// ms para drenar mensagens ativas</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<p>Cada fila tem seu prÃ³prio pool de threads. O <code>TThreadPool</code> gerencia:
+- DistribuiÃ§Ã£o de mensagens entre threads
+- Graceful shutdown (drenar mensagens ativas antes de parar)
+- Backpressure (se fila cheia, reduz taxa de consumo)</p>
+<h3 id="106-rastreamento-distribuado">10.6 Rastreamento DistribuÃ­do<a class="headerlink" href="#106-rastreamento-distribuado" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">type</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="n">ITraceContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">interface</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">TraceId</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">SpanId</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">    </span><span class="k">function</span><span class="w"> </span><span class="nf">ParentSpanId</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">    </span><span class="c1">// PropagaÃ§Ã£o via cabeÃ§alhos</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">    </span><span class="k">procedure</span><span class="w"> </span><span class="nf">ToHeaders</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">ACabecalhos</span><span class="o">:</span><span class="w"> </span><span class="n">TDictionary</span><span class="o">&lt;</span><span class="k">string</span><span class="o">,</span><span class="w"> </span><span class="k">string</span><span class="o">&gt;</span><span class="p">)</span><span class="o">;</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="nf">FromHeaders</span><span class="p">(</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">      </span><span class="k">const</span><span class="w"> </span><span class="n">ACabecalhos</span><span class="o">:</span><span class="w"> </span><span class="n">TDictionary</span><span class="o">&lt;</span><span class="k">string</span><span class="o">,</span><span class="w"> </span><span class="k">string</span><span class="o">&gt;</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="n">ITraceContext</span><span class="o">;</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="c1">// IntegraÃ§Ã£o futura com OpenTelemetry</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="c1">// - W3C Trace Context (traceparent, tracestate)</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="c1">// - Jaeger/Zipkin export via HTTP</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="c1">// - MÃ©tricas: OpenMetrics / Prometheus</span>
+</code></pre></div>
+<hr />
+<h2 id="conclusao">ConclusÃ£o<a class="headerlink" href="#conclusao" title="Permanent link">&para;</a></h2>
+<p>O <strong>MinusMessaging</strong> preenche o vÃ¡cuo mais significativo no ecossistema Delphi. Nenhuma soluÃ§Ã£o atual oferece:</p>
+<ol>
+<li><strong>Multi-provider</strong> com interface Ãºnica</li>
+<li><strong>PadrÃµes enterprise</strong> (outbox, saga, DLQ, circuit breaker)</li>
+<li><strong>IntegraÃ§Ã£o nativa</strong> com ORM, Feature Flags e REST</li>
+</ol>
+<p>As Fases 0 e 1 estÃ£o parcialmente implementadas: Core, Pub/Sub, DLQ, SerializaÃ§Ã£o BinÃ¡ria, Redis, RabbitMQ e Outbox jÃ¡ estÃ£o funcionais com 21 testes DUnitX passando.</p>
+<hr />
+<blockquote>
+<p><strong>PrÃ³ximos passos:</strong> Testes de integraÃ§Ã£o com Redis/RabbitMQ reais, health check, mÃ©tricas, CLI de publicaÃ§Ã£o, pacote BPL piloto.</p>
+<p><em>Documento gerado em Junho de 2026 â€” NÃ­vel: Arquiteto Especialista</em></p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 MinusFrameWork. MIT License.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/GabrielFerreiraMendes/minusframework-meta" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/minusframework" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
