@@ -69,6 +69,29 @@ Tudo do Pro mais Telemetria, AI/MCP Server e suporte prioritário. Para empresas
 
 30 dias de garantia incondicional. Se não ficar satisfeito, devolvemos 100% do valor.
 
+---
+
+## Doações
+
+Se você utiliza o MinusFrameWork e quer contribuir para o crescimento do projeto, aceitamos doações via Pix ou PayPal.
+
+**Para onde vai o dinheiro?**
+
+Toda contribuição é reinvestida no ecossistema:
+
+| Destino | Descrição |
+|---------|-----------|
+| **Licença Delphi** | Manutenção da assinatura Embarcadero para seguir as versões mais recentes da IDE |
+| **Infraestrutura** | Máquinas virtuais, servidores em nuvem e serviços para CI/CD, testes e deploy |
+| **Custos operacionais** | Domínios, ferramentas, certificados e despesas recorrentes |
+
+O objetivo é que o projeto se sustente comercialmente pelas licenças **Pro** e **Enterprise**, mas enquanto isso não é realidade, cada doação ajuda a manter o framework vivo e evoluindo.
+
+[Doar via Pix](mailto:gabriel@minusframework.com.br?subject=Doa%C3%A7%C3%A3o){ .md-button }
+[Doar via PayPal](mailto:gabriel@minusframework.com.br?subject=Doa%C3%A7%C3%A3o%20PayPal){ .md-button }
+
+---
+
 ## Dúvidas Frequentes
 
 **Preciso pagar todo ano?**
