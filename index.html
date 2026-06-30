@@ -601,6 +601,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparativo-de-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparativo de Tiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#requisitos" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1911,6 +1922,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#comparativo-de-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparativo de Tiers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#requisitos" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1974,55 +1996,145 @@
 <tr>
 <th>Módulo</th>
 <th>Descrição</th>
-<th>Licença</th>
+<th>Tier</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>MinusORM</strong></td>
-<td>ORM com RTTI, queries fluentes, Unit of Work, Change Tracking, cache, soft delete, audit — 7 bancos</td>
-<td>MIT</td>
+<td>ORM com RTTI, queries fluentes, Unit of Work, Change Tracking — SQLite</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>MinusORM Pro</strong></td>
+<td>ORM completo — 7 bancos (Firebird, PostgreSQL, MySQL, MariaDB, MSSQL, Oracle)</td>
+<td>Pro</td>
 </tr>
 <tr>
 <td><strong>MinusMigrator</strong></td>
 <td>Migração versionada de schema via CLI + GUI + DLL</td>
-<td>MIT</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>MinusCLI</strong></td>
+<td>CLI de scaffolding (<code>make:entity</code>, <code>new:api</code>)</td>
+<td>Free</td>
 </tr>
 <tr>
 <td><strong>MinusFeatureFlags</strong></td>
 <td>Feature flags com engine local, providers e REST API</td>
-<td>MIT</td>
+<td>Pro</td>
 </tr>
 <tr>
 <td><strong>MinusMessaging</strong></td>
 <td>Message bus multi-provider com retry, circuit breaker, sagas e outbox</td>
-<td>MIT</td>
-</tr>
-<tr>
-<td><strong>MinusTelemetry</strong></td>
-<td>Tracing e logging estruturado (OpenTelemetry-style)</td>
-<td>MIT</td>
+<td>Pro</td>
 </tr>
 <tr>
 <td><strong>MinusExtensions</strong></td>
 <td>Wrappers para Horse, JWT e bibliotecas de terceiros</td>
-<td>MIT</td>
+<td>Pro</td>
+</tr>
+<tr>
+<td><strong>MinusTelemetry</strong></td>
+<td>Tracing e logging estruturado (OpenTelemetry-style)</td>
+<td>Enterprise</td>
 </tr>
 <tr>
 <td><strong>MinusAI</strong></td>
 <td>Agentes inteligentes e servidor MCP (Model Context Protocol)</td>
-<td>MIT</td>
+<td>Enterprise</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="comece-em-5-minutos">Comece em 5 Minutos<a class="headerlink" href="#comece-em-5-minutos" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. Baixe o instalador mais recente</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># 2. Execute e escolha &quot;Instalação Completa&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 1. Baixe o instalador Free</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># 2. Execute e escolha &quot;Instalação Básica&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># 3. Adicione as BPLs ao RAD Studio</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 4. Crie seu primeiro projeto</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># 4. Crie seu primeiro projeto com SQLite</span>
 </code></pre></div>
 <p>👉 <a href="getting-started/"><strong>Guia de Quick Start</strong></a></p>
+<hr />
+<h2 id="comparativo-de-tiers">Comparativo de Tiers<a class="headerlink" href="#comparativo-de-tiers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Free</th>
+<th>Pro</th>
+<th>Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ORM SQLite</td>
+<td>Sim</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>ORM multi-banco</td>
+<td>—</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Migrator</td>
+<td>Sim</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td>Sim</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Messaging</td>
+<td>—</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Feature Flags</td>
+<td>—</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Extensions</td>
+<td>—</td>
+<td>Sim</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Telemetry</td>
+<td>—</td>
+<td>—</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>AI / MCP</td>
+<td>—</td>
+<td>—</td>
+<td>Sim</td>
+</tr>
+<tr>
+<td>Suporte</td>
+<td>Comunidade</td>
+<td>12 meses</td>
+<td>Prioritário</td>
+</tr>
+<tr>
+<td>Licença</td>
+<td>MIT</td>
+<td>Comercial</td>
+<td>Perpétua</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="requisitos">Requisitos<a class="headerlink" href="#requisitos" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2041,16 +2153,15 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>v0.1.0 (Community)</strong></td>
+<td><strong>Free (v0.1.0)</strong></td>
 <td><a href="https://github.com/GabrielFerreiraMendes/minusframework-meta/releases/latest">Baixar Instalador</a></td>
 </tr>
 <tr>
-<td><strong>Código-fonte</strong></td>
-<td><code>git clone https://github.com/GabrielFerreiraMendes/minusframework-meta.git</code></td>
+<td><strong>Pro / Enterprise</strong></td>
+<td><a href="mailto:gabriel@minusframework.com.br">Solicitar Orçamento</a></td>
 </tr>
 </tbody>
 </table>
-<p>A edição Community inclui todos os módulos com funcionalidades essenciais — sem limite de uso, sem expiração.</p>
 <hr />
 <h2 id="suporte">Suporte<a class="headerlink" href="#suporte" title="Permanent link">&para;</a></h2>
 <table>
@@ -2104,7 +2215,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2026 MinusFrameWork. MIT License.
+      Copyright &copy; 2026 MinusFrameWork. Free (MIT) · Pro · Enterprise.
     </div>
   
   
