@@ -37,7 +37,7 @@ uses
 
 const
   RSA_PUBLIC_KEY_B64 =
-    'MIIF...'; { substituir pela saida de generate-keys.js }
+    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1816xSNGnnCuo3K/V0xIXIHKRTY6Irq8gc6g2lJCe9URcyqsl5R+/ZsZ9hwbbxDDEq+sZ2D8GZYEUDHJBCNvKyhn2aA7VWRdEjROK5KXMk7ePOtePMj62i44hRFIsPqMaAs3oxl+l0yXGdxWIBwlqhdQMpNo8BBoUWJNPdPYbzl/JroqKQIN3+e+XjundvEQAJLqqCp/hzob9446ewe68NcYAXyAMajF6LOwRY/nABo8XHLAsfm6f1/Mbx4m+XNF5fP1PJTMUAn4cWK7x4tG/7OEtvhpLDsVqJoV2L/H744H0tFWEW/fWqafRZarhyogaI9DlDkZ+XlxvRWoOUaiiwIDAQAB';
 
 function CryptStringToBinaryWrapper(const s: string): TBytes;
 var
