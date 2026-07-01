@@ -89,8 +89,7 @@ O objetivo é que o projeto se sustente comercialmente pelas licenças **Pro** e
 
 **Pix:**
 
-<!-- QR Code Pix -->
-![QR Code Pix](assets/images/QR.jpeg)
+![QR Code Pix](assets/images/QR.jpeg){ width="60%" }
 
 **Pix (copia e cola):**
 ```
