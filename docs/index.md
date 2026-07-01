@@ -1,4 +1,4 @@
-<div class="hero" markdown>
+﻿<div class="hero" markdown>
 
 <p class="hero-tagline">
   O framework Delphi completo para aplicações corporativas.<br>
@@ -117,21 +117,6 @@ Agentes inteligentes e servidor MCP (Model Context Protocol) para Delphi.
 
 ---
 
-## Por que MinusFrameWork?
-
-| | MinusFrameWork | TMS Aurelius | Devart EntityDAC | mORMot |
-|---|:---:|:---:|:---:|:---:|
-| **ORM multi-banco** | :material-check: | :material-check: | :material-check: | :material-check: |
-| **Migração de schema** | :material-check: | :material-close: | :material-close: | :material-close: |
-| **Mensageria integrada** | :material-check: | :material-close: | :material-close: | :material-close: |
-| **Feature Flags** | :material-check: | :material-close: | :material-close: | :material-close: |
-| **Telemetria** | :material-check: | :material-close: | :material-close: | :material-close: |
-| **AI / MCP Server** | :material-check: | :material-close: | :material-close: | :material-close: |
-| **CLI de scaffolding** | :material-check: | :material-close: | :material-close: | :material-close: |
-| **Tier gratuito** | :material-check: | :material-close: | :material-close: | :material-check: |
-
----
-
 ## Requisitos
 
 | Requisito | Mínimo |
@@ -147,5 +132,4 @@ Agentes inteligentes e servidor MCP (Model Context Protocol) para Delphi.
 | Canal | |
 |-------|---|
 | :material-github: GitHub Issues | [Abrir Issue](https://github.com/GabrielFerreiraMendes/minusframework/issues) |
-| :material-email-outline: E-mail | [gabriel@minusframework.com.br](mailto:gabriel@minusframework.com.br) |
-| :material-forum: Discord | [discord.gg/minusframework](https://discord.gg/minusframework) |
+| :material-email-outline: E-mail | [gabrielferreiramendes.dev@gmail.com](mailto:gabrielferreiramendes.dev@gmail.com) |

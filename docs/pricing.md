@@ -1,25 +1,11 @@
-# Planos e Preços
-
-## Comparativo com o Mercado
-
-| Produto | Preço | O que inclui |
-|---------|-------|-------------|
-| **TMS Aurelius** (ORM only) | ~€499 | ORM, 1 desenvolvedor |
-| **Devart EntityDAC** (ORM only) | ~$299 | ORM, 1 desenvolvedor |
-| **Rollout.io** (Feature Flags only) | ~$99/mês | Feature Flags SaaS |
-| **Datadog APM** (Telemetry only) | ~$15/mês/host | Tracing + Metrics |
-| **MinusFrameWork Pro** | **R$197/ano** | ORM (7 bancos) + Messaging + Extensions + FeatureFlags |
-| **MinusFrameWork Enterprise** | **R$497/ano** | Pro + Telemetry + AI + Suporte prioritário |
-
----
+﻿# Planos e Preços
 
 ## Tabela de Preços
 
 | | Free | Pro | Enterprise |
 |---|:---:|:---:|:---:|
 | **Preço (BRL)** | R$ 0 | R$ 197/ano | R$ 497/ano |
-| **Preço (USD)** | $ 0 | $ 39/ano | $ 99/ano |
-| **Desenvolvedores** | 1 | 1 | até 5 |
+| **Desenvolvedores** | 1 | 1 | até 5 por bloco |
 | **Atualizações** | — | 12 meses | Perpétua |
 | **Suporte** | Comunidade | E-mail 48h | Prioritário 12h |
 | | | | |
@@ -51,7 +37,9 @@ Inclui ORM multi-banco, Mensageria, Feature Flags e Extensions. Ideal para aplic
 
 **R$ 197/ano** por desenvolvedor.
 
-[Solicitar Pro](mailto:gabriel@minusframework.com.br?subject=Licen%C3%A7a%20Pro){ .md-button .md-button--primary }
+Basta enviar um e-mail com os dados da sua empresa e o comprovante Pix — você recebe a chave de licença em até 24h.
+
+[Comprar Pro](mailto:gabrielferreiramendes.dev@gmail.com?subject=Licen%C3%A7a%20Pro){ .md-button .md-button--primary }
 
 ---
 
@@ -59,9 +47,16 @@ Inclui ORM multi-banco, Mensageria, Feature Flags e Extensions. Ideal para aplic
 
 Tudo do Pro mais Telemetria, AI/MCP Server e suporte prioritário. Para empresas que exigem suporte dedicado.
 
-**R$ 497/ano** — até 5 desenvolvedores.
+**R$ 497/ano** por bloco de até 5 desenvolvedores.
 
-[Solicitar Enterprise](mailto:gabriel@minusframework.com.br?subject=Licen%C3%A7a%20Enterprise){ .md-button .md-button--primary }
+| Colaboradores | Blocos | Total |
+|:---:|:---:|:---:|
+| até 5 | 1 | R$ 497/ano |
+| 6 a 10 | 2 | R$ 994/ano |
+| 11 a 15 | 3 | R$ 1.491/ano |
+| 16 a 20 | 4 | R$ 1.988/ano |
+
+[Comprar Enterprise](mailto:gabrielferreiramendes.dev@gmail.com?subject=Licen%C3%A7a%20Enterprise){ .md-button .md-button--primary }
 
 ---
 
@@ -73,7 +68,7 @@ Tudo do Pro mais Telemetria, AI/MCP Server e suporte prioritário. Para empresas
 
 ## Doações
 
-Se você utiliza o MinusFrameWork e quer contribuir para o crescimento do projeto, aceitamos doações via Pix ou PayPal.
+Se você utiliza o MinusFrameWork e quer contribuir para o crescimento do projeto, aceitamos doações via **Pix**.
 
 **Para onde vai o dinheiro?**
 
@@ -92,9 +87,9 @@ O objetivo é que o projeto se sustente comercialmente pelas licenças **Pro** e
 ![QR Code Pix](assets/images/QR.jpeg){ width="60%" }
 
 **Pix (copia e cola):**
-```
+`
 00020126580014br.gov.bcb.pix01364214aaa8-d6d1-4d01-81c1-7a0835fdc5b25204000053039865802BR5915MENDESGABRIEL986009Sao Paulo610901227-20062230519daqr113812089121688630461AF
-```
+`
 
 ---
 
@@ -106,8 +101,11 @@ A licença Pro tem validade de 12 meses com direito a atualizações. A Enterpri
 **Posso usar em mais de uma máquina?**
 Sim, desde que o mesmo desenvolvedor. Cada licença é por desenvolvedor, não por máquina.
 
-**Tem desconto para mais desenvolvedores?**
-Sim. Entre em contato para orçamento para equipes de 5+ devs.
+**Quantos blocos de Enterprise preciso?**
+Calcule: divida o número de desenvolvedores por 5 e arredonde para cima.
+- 5 devs → 1 bloco (R$ 497)
+- 8 devs → 2 blocos (R$ 994)
+- 12 devs → 3 blocos (R$ 1.491)
 
 **Posso atualizar do Free para o Pro?**
 Sim. Basta adquirir a chave Pro e aplicar no mesmo instalador — sem precisar reinstalar nada.

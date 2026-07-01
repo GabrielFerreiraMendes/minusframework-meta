@@ -1,37 +1,31 @@
-# Quick Start — O Tour de 5 Minutos
+﻿# Quick Start - O Tour de 5 Minutos
 
-## 1. Instalação (Free)
+## 1. Instalacao (Free)
 
-Baixe o instalador Free da [página de releases](https://github.com/GabrielFerreiraMendes/minusframework/releases/latest) e execute.
+Baixe o instalador Free da pagina de releases e execute.
 
-O instalador copia para `C:\MinusFramework`:
+O instalador copia para C:\MinusFramework:
 
-- **BPLs** — pacotes runtime e design-time
-- **DCPs** — arquivos de cabeçalho
-- **DLLs** — ORM (SQLite) e Migrator via C-API
-- **CLIs** — `MinusMigrator.exe`, `minus.exe`
-- **Samples** — projetos demonstrativos com código-fonte
+- **BPLs** - pacotes runtime e design-time
+- **DCPs** - arquivos de cabecalho
+- **DLLs** - ORM (SQLite) e Migrator via C-API
+- **CLIs** - MinusMigrator.exe, minus.exe
+- **Samples** - projetos demonstrativos com codigo-fonte
 
-### Configuração no RAD Studio
+### Configuracao no RAD Studio
 
-1. Abra `Tools > Options > Environment Options > Delphi Options > Library`
-2. Adicione ao `Library path`:
-   ```
+1. Abra Tools > Options > Environment Options > Delphi Options > Library
+2. Adicione ao Library path:
    C:\MinusFramework\Bpl
    C:\MinusFramework\Dcp
-   ```
-3. Instale os pacotes design-time em `Component > Install Packages > Add`:
-   ```
+3. Instale os pacotes design-time em Component > Install Packages > Add:
    C:\MinusFramework\Bpl\MinusFramework_Design.bpl
-   ```
-
-> **Pro/Enterprise:** Consulte [Licenciamento](licensing.md) para adquirir acesso a todos os bancos, mensageria, telemetria e AI.
 
 ---
 
-## 2. Hello World — SQLite em Memória
+## 2. Hello World - SQLite em Memoria
 
-Crie um novo **Console Application** no Delphi e adicione as uses:
+Crie um novo Console Application no Delphi:
 
 ```pascal
 program HelloMinus;
@@ -42,20 +36,14 @@ uses
   System.SysUtils,
   MF,
   MF.Types;
-```
 
-### Conecte ao SQLite
-
-```pascal
-var
-  LConexao: IConexao;
+var LConexao: IConexao;
 begin
   LConexao := TConexaoFactory.Criar
     .Driver('SQLite')
     .Database(':memory:')
     .Conectar;
-
-  WriteLn('Conectado ao SQLite em memória!');
+  WriteLn('Conectado ao SQLite em memoria!');
   ReadLn;
 end.
 ```
@@ -78,13 +66,10 @@ type
     [AutoIncremento]
     [Campo('ID')]
     property Id: Integer read FId write FId;
-
     [Campo('NOME', 100)]
     property Nome: string read FNome write FNome;
-
     [Campo('EMAIL', 150)]
     property Email: string read FEmail write FEmail;
-
     [Campo('DATA_CADASTRO')]
     property DataCadastro: TDateTime read FDataCadastro write FDataCadastro;
   end;
@@ -98,7 +83,6 @@ type
 var
   LRepos: IRepositorio<TPessoa>;
   LPessoa: TPessoa;
-  LTodas: TArray<TPessoa>;
 begin
   LRepos := TConexaoFactory.Criar
     .Driver('SQLite')
@@ -106,50 +90,100 @@ begin
     .Conectar
     .Repositorio<TPessoa>;
 
-  // Criar tabela automaticamente
   LRepos.GerarTabela;
 
-  // --- Salvar ---
+  // Salvar
   LPessoa := TPessoa.Create;
-  LPessoa.Nome := 'João da Silva';
+  LPessoa.Nome := 'Joao da Silva';
   LPessoa.Email := 'joao@email.com';
   LPessoa.DataCadastro := Now;
   LRepos.Salvar(LPessoa);
   WriteLn('Salvo! ID: ', LPessoa.Id);
 
-  // --- Buscar Todos ---
-  LTodas := LRepos.BuscarTodos;
-  for var LItem in LTodas do
-    WriteLn(LItem.Nome, ' — ', LItem.Email);
+  // Buscar Todos
+  for var LItem in LRepos.BuscarTodos do
+    WriteLn(LItem.Nome + ' - ' + LItem.Email);
 
-  // --- Buscar por ID ---
+  // Buscar por ID
   LPessoa := LRepos.BuscarPorId(1);
-  if LPessoa <> nil then
-    WriteLn('Encontrado: ', LPessoa.Nome);
 
-  // --- Atualizar ---
-  LPessoa.Nome := 'João atualizado';
+  // Atualizar
+  LPessoa.Nome := 'Joao atualizado';
   LRepos.Salvar(LPessoa);
 
-  // --- Deletar ---
+  // Deletar
   LRepos.Deletar(LPessoa);
 end.
 ```
 
 ---
 
-## 5. Próximos Passos
+## 5. Para Usuarios Pro / Enterprise
 
-| Tópico | Link |
-|--------|------|
-| ORM Completo (Criteria API, UoW) | [Documentação ORM](orm/crud.md) |
-| Migração de Banco | [MinusMigrator CLI](migrator/cli.md) |
-| CLI de Scaffolding | [Comandos do minus.exe](cli/commands.md) |
-| Servidor MCP de IA | [MinusAI](ai/mcp-server.md) — Enterprise |
-| Mensageria | [MinusMessaging](messaging/config.md) — Pro |
-| Tiers de Licença | [Licenciamento](licensing.md) |
+### Ativar chave de licenca
+
+```pascal
+uses MF.LicenseManager;
+
+begin
+  TLicenseManager.Validate('sua-chave-aqui');
+end;
+```
+
+A aprovacao da chave libera automaticamente os modulos do seu tier.
+
+### Conectar a outros bancos
+
+Com a chave Pro ou Enterprise, troque o driver SQLite por qualquer outro:
+
+```pascal
+// Firebird
+LConexao := TConexaoFactory.Criar
+  .Driver('Firebird')
+  .Database('C:\dados.fdb')
+  .Usuario('SYSDBA')
+  .Senha('masterkey')
+  .Conectar;
+
+// PostgreSQL
+LConexao := TConexaoFactory.Criar
+  .Driver('PostgreSQL')
+  .Database('meudb')
+  .Servidor('localhost')
+  .Conectar;
+```
+
+### Hello World com Mensageria
+
+```pascal
+var LBus: IMessageBus;
+begin
+  LBus := TMessageBusFactory.Criar
+    .Provider(pInMemory)
+    .Construir;
+
+  LBus.Publicar<string>('Hello MinusMessaging!');
+
+  LBus.Consumir<string>(
+    procedure(const AMsg: string)
+    begin
+      WriteLn(AMsg);
+    end
+  );
+end;
+```
 
 ---
 
-!!! tip "Dica"
-    Execute `minus make:entity Pessoa` no terminal para gerar a unit automaticamente — o CLI usa templates otimizados com todos os atributos ORM.
+## Proximos Passos
+
+| Topico | Link |
+|--------|------|
+| ORM Completo (Criteria, UoW) | Documentacao ORM |
+| Migracao de Banco | MinusMigrator CLI |
+| CLI de Scaffolding | Comandos do minus.exe |
+| Servidor MCP de IA | MinusAI - Enterprise |
+| Mensageria | MinusMessaging - Pro |
+| Tiers de Licenca | Licenciamento |
+
+> Dica: Execute `minus make:entity Pessoa` no terminal para gerar a unit automaticamente.
