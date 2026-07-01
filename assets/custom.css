@@ -1,3 +1,167 @@
-.md-header__topic {
-  display: none;
+/* ==========================================================================
+   MinusFrameWork — GitHub Pages Custom Theme
+   ========================================================================== */
+
+/* --- Header / Logo visibility ------------------------------------------- */
+
+/* Aumenta o logo no header para melhor visibilidade */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.8rem;
+  width: auto;
+}
+
+/* Nome do site ao lado do logo — mais legível */
+.md-header__topic:first-child .md-ellipsis {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+/* --- Hero Section (homepage) -------------------------------------------- */
+
+.hero {
+  text-align: center;
+  padding: 2.5rem 1rem 2rem;
+}
+
+.hero img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.hero .hero-tagline {
+  font-size: 1.15rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero .hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.hero .hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+/* --- Module Grid (homepage cards) --------------------------------------- */
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.module-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.module-card:hover {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.module-card h3 {
+  margin-top: 0;
+  font-size: 1rem;
+}
+
+.module-card p {
+  font-size: 0.875rem;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0.5rem;
+}
+
+/* --- Tier Badges -------------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}
+
+.badge-free {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-pro {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-enterprise {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+[data-md-color-scheme="slate"] .badge-free {
+  background: #064e3b;
+  color: #6ee7b7;
+}
+
+[data-md-color-scheme="slate"] .badge-pro {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+[data-md-color-scheme="slate"] .badge-enterprise {
+  background: #78350f;
+  color: #fcd34d;
+}
+
+/* --- Quick comparison table styling ------------------------------------- */
+
+.comparison-table {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.comparison-table th {
+  text-align: center !important;
+}
+
+.comparison-table td:nth-child(n+2) {
+  text-align: center;
+}
+
+/* --- Footer  ------------------------------------------------------------ */
+
+.md-footer-meta {
+  font-size: 0.8rem;
+}
+
+/* --- Responsive adjustments --------------------------------------------- */
+
+@media (max-width: 600px) {
+  .hero img {
+    max-width: 220px;
+  }
+
+  .module-grid {
+    grid-template-columns: 1fr;
+  }
 }
