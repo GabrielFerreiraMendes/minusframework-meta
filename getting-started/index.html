@@ -552,60 +552,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-para-usuarios-pro-enterprise" class="md-nav__link">
+  <a href="#5-proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Para Usuarios Pro / Enterprise
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Para Usuarios Pro / Enterprise">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ativar-chave-de-licenca" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ativar chave de licenca
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conectar-a-outros-bancos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conectar a outros bancos
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hello-world-com-mensageria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hello World com Mensageria
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proximos-passos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Proximos Passos
+        5. Proximos Passos
       
     </span>
   </a>
@@ -1865,60 +1815,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-para-usuarios-pro-enterprise" class="md-nav__link">
+  <a href="#5-proximos-passos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Para Usuarios Pro / Enterprise
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Para Usuarios Pro / Enterprise">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ativar-chave-de-licenca" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ativar chave de licenca
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conectar-a-outros-bancos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conectar a outros bancos
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hello-world-com-mensageria" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hello World com Mensageria
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proximos-passos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Proximos Passos
+        5. Proximos Passos
       
     </span>
   </a>
@@ -2048,51 +1948,7 @@
 <a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="k">end</span><span class="o">.</span>
 </code></pre></div>
 <hr />
-<h2 id="5-para-usuarios-pro-enterprise">5. Para Usuarios Pro / Enterprise<a class="headerlink" href="#5-para-usuarios-pro-enterprise" title="Permanent link">&para;</a></h2>
-<h3 id="ativar-chave-de-licenca">Ativar chave de licenca<a class="headerlink" href="#ativar-chave-de-licenca" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">uses</span><span class="w"> </span><span class="n">MF</span><span class="o">.</span><span class="n">LicenseManager</span><span class="o">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">begin</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="n">TLicenseManager</span><span class="o">.</span><span class="n">Validate</span><span class="p">(</span><span class="s">&#39;sua-chave-aqui&#39;</span><span class="p">)</span><span class="o">;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">end</span><span class="o">;</span>
-</code></pre></div>
-<p>A aprovacao da chave libera automaticamente os modulos do seu tier.</p>
-<h3 id="conectar-a-outros-bancos">Conectar a outros bancos<a class="headerlink" href="#conectar-a-outros-bancos" title="Permanent link">&para;</a></h3>
-<p>Com a chave Pro ou Enterprise, troque o driver SQLite por qualquer outro:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Firebird</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">LConexao</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TConexaoFactory</span><span class="o">.</span><span class="n">Criar</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="o">.</span><span class="n">Driver</span><span class="p">(</span><span class="s">&#39;Firebird&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s">&#39;C:\dados.fdb&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="o">.</span><span class="n">Usuario</span><span class="p">(</span><span class="s">&#39;SYSDBA&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="o">.</span><span class="n">Senha</span><span class="p">(</span><span class="s">&#39;masterkey&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="o">.</span><span class="n">Conectar</span><span class="o">;</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1">// PostgreSQL</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="n">LConexao</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TConexaoFactory</span><span class="o">.</span><span class="n">Criar</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="o">.</span><span class="n">Driver</span><span class="p">(</span><span class="s">&#39;PostgreSQL&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">  </span><span class="o">.</span><span class="n">Database</span><span class="p">(</span><span class="s">&#39;meudb&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="w">  </span><span class="o">.</span><span class="n">Servidor</span><span class="p">(</span><span class="s">&#39;localhost&#39;</span><span class="p">)</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="o">.</span><span class="n">Conectar</span><span class="o">;</span>
-</code></pre></div>
-<h3 id="hello-world-com-mensageria">Hello World com Mensageria<a class="headerlink" href="#hello-world-com-mensageria" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">var</span><span class="w"> </span><span class="n">LBus</span><span class="o">:</span><span class="w"> </span><span class="n">IMessageBus</span><span class="o">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">begin</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="n">LBus</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">TMessageBusFactory</span><span class="o">.</span><span class="n">Criar</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="o">.</span><span class="n">Provider</span><span class="p">(</span><span class="n">pInMemory</span><span class="p">)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="o">.</span><span class="n">Construir</span><span class="o">;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="n">LBus</span><span class="o">.</span><span class="n">Publicar</span><span class="o">&lt;</span><span class="k">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&#39;Hello MinusMessaging!&#39;</span><span class="p">)</span><span class="o">;</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="n">LBus</span><span class="o">.</span><span class="n">Consumir</span><span class="o">&lt;</span><span class="k">string</span><span class="o">&gt;</span><span class="p">(</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">procedure</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">AMsg</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="p">)</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">begin</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="nb">WriteLn</span><span class="p">(</span><span class="n">AMsg</span><span class="p">)</span><span class="o">;</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="k">end</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">  </span><span class="p">)</span><span class="o">;</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">end</span><span class="o">;</span>
-</code></pre></div>
-<hr />
-<h2 id="proximos-passos">Proximos Passos<a class="headerlink" href="#proximos-passos" title="Permanent link">&para;</a></h2>
+<h2 id="5-proximos-passos">5. Proximos Passos<a class="headerlink" href="#5-proximos-passos" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2113,21 +1969,10 @@
 <td>CLI de Scaffolding</td>
 <td>Comandos do minus.exe</td>
 </tr>
-<tr>
-<td>Servidor MCP de IA</td>
-<td>MinusAI - Enterprise</td>
-</tr>
-<tr>
-<td>Mensageria</td>
-<td>MinusMessaging - Pro</td>
-</tr>
-<tr>
-<td>Tiers de Licenca</td>
-<td>Licenciamento</td>
-</tr>
 </tbody>
 </table>
 <blockquote>
+<p>Dica: Execute <code>minus make:entity Pessoa</code> no terminal para gerar a unit automaticamente.</p>
 <p>Dica: Execute <code>minus make:entity Pessoa</code> no terminal para gerar a unit automaticamente.</p>
 </blockquote>
 
