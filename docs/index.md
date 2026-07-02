@@ -8,7 +8,7 @@
 <div class="hero-badges">
   <img src="https://img.shields.io/badge/Delphi-11+-E2243D?logo=delphi&logoColor=white" alt="Delphi 11+">
   <img src="https://img.shields.io/badge/Win32%20|%20Win64-0078D4?logo=windows&logoColor=white" alt="Platform">
-  <img src="https://img.shields.io/badge/Licença-MIT%20|%20Pro%20|%20Enterprise-7c3aed" alt="Licença">
+  <img src="https://img.shields.io/badge/Licença-MIT-brightgreen" alt="Licença">
 </div>
 
 <div class="hero-cta">
@@ -30,7 +30,7 @@
 ORM completo com RTTI, queries fluentes, Unit of Work e Change Tracking.
 
 <span class="badge badge-free">Free (SQLite)</span>
-<span class="badge badge-pro">Pro (7 bancos)</span>
+<span class="badge badge-pro" style="opacity:0.6;">Pro (7 bancos) — em breve</span>
 
 [Documentação →](orm/){ .md-button .md-button--primary }
 
@@ -63,7 +63,7 @@ CLI de scaffolding para gerar entidades, APIs e projetos em segundos.
 ### :material-toggle-switch: MinusFeatureFlags
 Feature flags com rollout percentual, A/B testing, SSE e REST API.
 
-<span class="badge badge-pro">Pro</span>
+<span class="badge badge-pro" style="opacity:0.6;">Pro — em breve</span>
 
 [Documentação →](modules/FeatureFlags/){ .md-button .md-button--primary }
 
@@ -74,7 +74,7 @@ Feature flags com rollout percentual, A/B testing, SSE e REST API.
 ### :material-message-flash: MinusMessaging
 Message bus multi-provider com retry, circuit breaker, sagas e outbox pattern.
 
-<span class="badge badge-pro">Pro</span>
+<span class="badge badge-pro" style="opacity:0.6;">Pro — em breve</span>
 
 [Documentação →](messaging/){ .md-button .md-button--primary }
 
@@ -85,7 +85,7 @@ Message bus multi-provider com retry, circuit breaker, sagas e outbox pattern.
 ### :material-puzzle: MinusExtensions
 Integrações prontas para Horse, JWT e bibliotecas de terceiros.
 
-<span class="badge badge-pro">Pro</span>
+<span class="badge badge-pro" style="opacity:0.6;">Pro — em breve</span>
 
 [Documentação →](extensions/){ .md-button .md-button--primary }
 
@@ -96,7 +96,7 @@ Integrações prontas para Horse, JWT e bibliotecas de terceiros.
 ### :material-chart-timeline-variant: MinusTelemetry
 Tracing e logging estruturado no padrão OpenTelemetry.
 
-<span class="badge badge-enterprise">Enterprise</span>
+<span class="badge badge-enterprise" style="opacity:0.6;">Enterprise — em breve</span>
 
 [Documentação →](telemetry/){ .md-button .md-button--primary }
 
@@ -107,7 +107,7 @@ Tracing e logging estruturado no padrão OpenTelemetry.
 ### :material-robot: MinusAI
 Agentes inteligentes e servidor MCP (Model Context Protocol) para Delphi.
 
-<span class="badge badge-enterprise">Enterprise</span>
+<span class="badge badge-enterprise" style="opacity:0.6;">Enterprise — em breve</span>
 
 [Documentação →](ai/){ .md-button .md-button--primary }
 

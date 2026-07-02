@@ -118,72 +118,14 @@ end.
 
 ---
 
-## 5. Para Usuarios Pro / Enterprise
-
-### Ativar chave de licenca
-
-```pascal
-uses MF.LicenseManager;
-
-begin
-  TLicenseManager.Validate('sua-chave-aqui');
-end;
-```
-
-A aprovacao da chave libera automaticamente os modulos do seu tier.
-
-### Conectar a outros bancos
-
-Com a chave Pro ou Enterprise, troque o driver SQLite por qualquer outro:
-
-```pascal
-// Firebird
-LConexao := TConexaoFactory.Criar
-  .Driver('Firebird')
-  .Database('C:\dados.fdb')
-  .Usuario('SYSDBA')
-  .Senha('masterkey')
-  .Conectar;
-
-// PostgreSQL
-LConexao := TConexaoFactory.Criar
-  .Driver('PostgreSQL')
-  .Database('meudb')
-  .Servidor('localhost')
-  .Conectar;
-```
-
-### Hello World com Mensageria
-
-```pascal
-var LBus: IMessageBus;
-begin
-  LBus := TMessageBusFactory.Criar
-    .Provider(pInMemory)
-    .Construir;
-
-  LBus.Publicar<string>('Hello MinusMessaging!');
-
-  LBus.Consumir<string>(
-    procedure(const AMsg: string)
-    begin
-      WriteLn(AMsg);
-    end
-  );
-end;
-```
-
----
-
-## Proximos Passos
+## 5. Proximos Passos
 
 | Topico | Link |
 |--------|------|
 | ORM Completo (Criteria, UoW) | Documentacao ORM |
 | Migracao de Banco | MinusMigrator CLI |
 | CLI de Scaffolding | Comandos do minus.exe |
-| Servidor MCP de IA | MinusAI - Enterprise |
-| Mensageria | MinusMessaging - Pro |
-| Tiers de Licenca | Licenciamento |
+
+> Dica: Execute `minus make:entity Pessoa` no terminal para gerar a unit automaticamente.
 
 > Dica: Execute `minus make:entity Pessoa` no terminal para gerar a unit automaticamente.
