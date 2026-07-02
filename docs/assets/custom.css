@@ -12,7 +12,7 @@
 }
 
 /* Oculta o texto do nome ao lado do logo — só a logo aparece */
-.md-header__topic {
+.md-header__title {
   display: none;
 }
 
