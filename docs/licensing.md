@@ -1,20 +1,24 @@
 ﻿# Licenciamento
 
-O MinusFrameWork é distribuído sob licença **MIT** — software livre, uso livre.
+O MinusFrameWork é distribuído em três tiers de licença.
 
-## Free (MIT)
+## Tiers
+
+### Free (MIT)
 
 | Módulo | Incluído |
 |--------|----------|
-| MinusORM (SQLite) | Sim |
+| MinusORM (SQLite apenas) | Sim |
 | MinusMigrator | Sim |
 | MinusCLI | Sim |
 
-**Licença MIT.** Use, modifique, distribua. Sem restrições, sem chaves, sem validação.
+**Licença MIT** — código aberto, uso livre para projetos pessoais e aprendizado. Sem restrições, sem chaves, sem validação.
 
 ---
 
-## Pro — Em Breve
+### Pro (em breve)
+
+Tudo do **Free**, mais:
 
 | Módulo | Incluído |
 |--------|----------|
@@ -23,16 +27,22 @@ O MinusFrameWork é distribuído sob licença **MIT** — software livre, uso li
 | MinusExtensions | Sim |
 | MinusFeatureFlags | Sim |
 
+**Licença perpétua.** O software funciona indefinidamente. Inclui atualizações e suporte por 12 meses. Renovação anual opcional.
+
 ---
 
-## Enterprise — Em Breve
+### Enterprise (em breve)
+
+Tudo do **Pro**, mais:
 
 | Módulo | Incluído |
 |--------|----------|
-| Tudo do Pro | Sim |
 | MinusTelemetry | Sim |
 | MinusAI | Sim |
 | Suporte prioritário | Sim |
+| Consultoria técnica | Sim |
+
+**Licença perpétua.** Inclui atualizações e suporte por 12 meses. Renovação anual opcional.
 
 ---
 
